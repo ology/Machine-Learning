@@ -6,8 +6,8 @@ from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn import metrics
 
-www = '/Users/gene/Documents/data/beatles-who-wrote-what.txt'
-path = '/Users/gene/Documents/lit/Beatles/'
+www = 'beatles-who-wrote-what.txt'
+path = 'Beatles/'
 
 d = {}
 
