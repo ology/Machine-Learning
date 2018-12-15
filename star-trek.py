@@ -6,7 +6,7 @@ def file_to_df(path, name):
     fh = open(path + '/' + name + '.txt')
     data = fh.read()
     fh.close()
-    tokenizer = nltk.data.load('/Users/gene/nltk_data/tokenizers/punkt/english.pickle')
+    tokenizer = nltk.data.load('nltk_data/tokenizers/punkt/english.pickle')
     return pd.DataFrame(
         zip(
             tokenizer.tokenize(data),
@@ -15,7 +15,7 @@ def file_to_df(path, name):
         columns=['text','person']
     )
 
-path = '/Users/gene/Documents/lit/Kirk-Spock-McCoy'
+path = 'Kirk-Spock-McCoy'
 
 mccoy = file_to_df(path, 'mccoy')
 spock = file_to_df(path, 'spock')
