@@ -1,3 +1,5 @@
+# Write-up: http://techn.ology.net/predicting-beatles-song-authorship-with-scikit-learn/
+
 import re
 import os.path
 from sklearn.model_selection import train_test_split
