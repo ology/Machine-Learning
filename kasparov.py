@@ -71,7 +71,7 @@ def create_csv(threshold):
     with open('kasparov.csv', 'wb') as csvfile:
         fh = csv.writer(csvfile)
         # Get the files to parse
-        path = '/Users/gene/sandbox/Chess-Inspector/public/pgn'
+        path = 'pgn'
         pgn_files = get_pgn(path)
         for pgn_file in pgn_files:
             # Read the game from the given PGN file
