@@ -1,3 +1,5 @@
+# Write-up: http://techn.ology.net/predicting-star-trek-tos-spoken-lines-with-scikit-learn/
+
 # LOAD FILES INTO A DATAFRAME
 import pandas as pd
 import nltk.data
