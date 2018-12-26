@@ -1,3 +1,5 @@
+# Write-up: http://techn.ology.net/investigating-kasparov-chess-moves-with-scikit-learn/
+
 import chess # https://python-chess.readthedocs.io/en/latest/
 import chess.pgn
 import re
