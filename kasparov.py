@@ -130,77 +130,78 @@ create_csv(0)
 X_train, X_test, y_train, y_test = train()
 
 
-# K Nearest Neighbors
-from sklearn.neighbors import KNeighborsClassifier
-knn = KNeighborsClassifier(n_neighbors=5)
-knn.fit(X_train, y_train)
-y_pred = knn.predict(X_test)
-print(metrics.accuracy_score(y_test, y_pred)) # 0.12101669195751139 for all moves in game
+def trial_and_error():
 
-
-# Better k?
-k_range = range(1, 26)
-scores = []
-for k in k_range:
-    knn = KNeighborsClassifier(n_neighbors=k)
+    # K Nearest Neighbors
+    from sklearn.neighbors import KNeighborsClassifier
+    knn = KNeighborsClassifier(n_neighbors=5)
     knn.fit(X_train, y_train)
     y_pred = knn.predict(X_test)
-    scores.append(metrics.accuracy_score(y_test, y_pred))
-
-plt.plot(k_range, scores)
-plt.xlabel('k')
-plt.ylabel('Accuracy')
-plt.show()
+    print(metrics.accuracy_score(y_test, y_pred)) # 0.12101669195751139 for all moves in game
 
 
-# Multinomial Naive Bayes
-from sklearn.naive_bayes import MultinomialNB
-nb = MultinomialNB()
-nb.fit(X_train, y_train)
-y_pred = nb.predict(X_test)
-print(metrics.accuracy_score(y_test, y_pred)) # 0.07169954476479515 for all moves in game
+    # Better k?
+    k_range = range(1, 26)
+    scores = []
+    for k in k_range:
+        knn = KNeighborsClassifier(n_neighbors=k)
+        knn.fit(X_train, y_train)
+        y_pred = knn.predict(X_test)
+        scores.append(metrics.accuracy_score(y_test, y_pred))
+
+    plt.plot(k_range, scores)
+    plt.xlabel('k')
+    plt.ylabel('Accuracy')
+    plt.show()
 
 
-# Support Vector Machine
-from sklearn import svm
-classifier = svm.SVC(gamma=0.001)
-classifier.fit(X_train, y_train)
-y_pred = classifier.predict(X_test)
-print(metrics.accuracy_score(y_test, y_pred)) # 0.15440060698027314 for all moves in game
+    # Multinomial Naive Bayes
+    from sklearn.naive_bayes import MultinomialNB
+    nb = MultinomialNB()
+    nb.fit(X_train, y_train)
+    y_pred = nb.predict(X_test)
+    print(metrics.accuracy_score(y_test, y_pred)) # 0.07169954476479515 for all moves in game
 
 
-# Decision Tree
-from sklearn.tree import DecisionTreeClassifier
-accuracy = decision_tree(X_train, X_test, y_train, y_test)
-print(accuracy) # 0.17071320182094082 for all moves in game
+    # Support Vector Machine
+    from sklearn import svm
+    classifier = svm.SVC(gamma=0.001)
+    classifier.fit(X_train, y_train)
+    y_pred = classifier.predict(X_test)
+    print(metrics.accuracy_score(y_test, y_pred)) # 0.15440060698027314 for all moves in game
 
 
-create_csv(3)
-X_train, X_test, y_train, y_test = train()
-accuracy = decision_tree(X_train, X_test, y_train, y_test)
-print(accuracy)
+    # Decision Tree
+    from sklearn.tree import DecisionTreeClassifier
+    accuracy = decision_tree(X_train, X_test, y_train, y_test)
+    print(accuracy) # 0.17071320182094082 for all moves in game
 
-create_csv(6)
-X_train, X_test, y_train, y_test = train()
-accuracy = decision_tree(X_train, X_test, y_train, y_test)
-print(accuracy)
 
-create_csv(12)
-X_train, X_test, y_train, y_test = train()
-accuracy = decision_tree(X_train, X_test, y_train, y_test)
-print(accuracy)
-
-k_range = range(1, 15)
-scores = []
-for k in k_range:
-    create_csv(k)
+    create_csv(3)
     X_train, X_test, y_train, y_test = train()
     accuracy = decision_tree(X_train, X_test, y_train, y_test)
     print(accuracy)
-    scores.append(accuracy)
 
-plt.plot(k_range, scores)
-plt.xlabel('Moves')
-plt.ylabel('Accuracy')
-plt.show()
+    create_csv(6)
+    X_train, X_test, y_train, y_test = train()
+    accuracy = decision_tree(X_train, X_test, y_train, y_test)
+    print(accuracy)
 
+    create_csv(12)
+    X_train, X_test, y_train, y_test = train()
+    accuracy = decision_tree(X_train, X_test, y_train, y_test)
+    print(accuracy)
+
+    k_range = range(1, 15)
+    scores = []
+    for k in k_range:
+        create_csv(k)
+        X_train, X_test, y_train, y_test = train()
+        accuracy = decision_tree(X_train, X_test, y_train, y_test)
+        print(accuracy)
+        scores.append(accuracy)
+
+    plt.plot(k_range, scores)
+    plt.xlabel('Moves')
+    plt.ylabel('Accuracy')
+    plt.show()
