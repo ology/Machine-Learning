@@ -60,7 +60,6 @@ print(np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
 datum = data.iloc[[88]]
 #print(datum)
 X = datum[feature_cols]
-y = datum[response_col]
 y_pred = estimator.predict(X)
 print(y_pred) # 25.95248441
 
@@ -69,6 +68,5 @@ print(y_pred) # 25.95248441
 datum = data.iloc[[163]]
 #print(datum)
 X = datum[feature_cols]
-y = datum[response_col]
 y_pred = estimator.predict(X)
 print(y_pred) # 13.79459475
