@@ -44,7 +44,9 @@ estimator.fit(X_train, y_train)
 
 #print(estimator.intercept_)
 #print(estimator.coef_)
-#zip(feature_cols, estimator.coef_[0])
+z = zip(feature_cols, estimator.coef_[0])
+z = set(z)
+print(z)
 
 y_pred = estimator.predict(X_test)
 
