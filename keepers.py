@@ -21,11 +21,11 @@ pd.set_option('display.max_rows', data.shape[0]+1)
 #print(data.tail())
 #print(data.shape)
 
-feature_cols = ['age', 'seasons', 'mins', 'apps', 'minapp', 'starts', 'subs', 'ga', 'ga90', 'sota', 'win', 'draw', 'loss', 'cs', 'csperc', 'saves']
-response_col = ['rank']
-
 #sns.pairplot(data, x_vars=feature_cols, y_vars=response_col, size=7, aspect=0.7, kind='reg')
 #plt.show()
+
+feature_cols = ['age', 'seasons', 'mins', 'apps', 'minapp', 'starts', 'subs', 'ga', 'ga90', 'sota', 'win', 'draw', 'loss', 'cs', 'csperc', 'saves']
+response_col = ['rank']
 
 X = data[feature_cols]
 y = data[response_col]
