@@ -53,3 +53,12 @@ y_pred = estimator.predict(X_test)
 print(metrics.mean_absolute_error(y_test, y_pred))
 print(metrics.mean_squared_error(y_test, y_pred))
 print(np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
+
+print(X_test.iloc[[1]])
+print(y_test.iloc[[1]]) # 29
+datum = data.iloc[[88]]
+print(datum)
+X = datum[feature_cols]
+y = datum[response_col]
+y_pred = estimator.predict(X)
+print(y_pred) # 25.95248441
