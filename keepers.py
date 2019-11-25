@@ -34,6 +34,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=1)
 
 #print(X_train)
 #print(X_test)
+#print(y_test)
 #print(y_train)
 #print(X_train.shape, y_train.shape)
 #print(X_test.shape, y_test.shape)
@@ -54,11 +55,20 @@ print(metrics.mean_absolute_error(y_test, y_pred))
 print(metrics.mean_squared_error(y_test, y_pred))
 print(np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
 
-print(X_test.iloc[[1]])
-print(y_test.iloc[[1]]) # 29
+#print(X_test.iloc[[1]])
+#print(y_test.iloc[[1]]) # 29
 datum = data.iloc[[88]]
-print(datum)
+#print(datum)
 X = datum[feature_cols]
 y = datum[response_col]
 y_pred = estimator.predict(X)
 print(y_pred) # 25.95248441
+
+#print(X_test.iloc[[2]])
+#print(y_test.iloc[[2]]) # 18
+datum = data.iloc[[163]]
+#print(datum)
+X = datum[feature_cols]
+y = datum[response_col]
+y_pred = estimator.predict(X)
+print(y_pred) # 13.79459475
