@@ -44,7 +44,20 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=1)
 #print('X_test.shape, y_test.shape:', X_test.shape, y_test.shape)
 #print('isnan(X_train):', np.isnan(X_train))
 
-estimator = KNeighborsClassifier(n_neighbors=1)
+k_range = range(1, 26)
+scores = []
+for k in k_range:
+    estimator = KNeighborsClassifier(n_neighbors=k)
+    estimator.fit(X_train, y_train.values.ravel())
+    y_pred = estimator.predict(X_test)
+    scores.append(metrics.accuracy_score(y_test, y_pred))
+
+plt.plot(k_range, scores)
+plt.xlabel('k')
+plt.ylabel('Accuracy')
+plt.show()  # Highest=24
+
+estimator = KNeighborsClassifier(n_neighbors=24)
 estimator.fit(X_train, y_train.values.ravel())
 
 #print(estimator.intercept_)
@@ -65,7 +78,7 @@ datum = data.iloc[[88]]
 #print(datum)
 X = datum[feature_cols]
 y_pred = estimator.predict(X)
-print('Prediction (29):', y_pred) # 27
+print('Prediction for 29:', y_pred) # 27
 
 #print(X_test.iloc[[2]])
 #print(y_test.iloc[[2]]) # 18
@@ -73,4 +86,4 @@ datum = data.iloc[[163]]
 #print(datum)
 X = datum[feature_cols]
 y_pred = estimator.predict(X)
-print('Prediction (18):', y_pred) # 16
+print('Prediction for 18:', y_pred) # 16
