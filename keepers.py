@@ -57,7 +57,7 @@ y_pred = estimator.predict(X_test)
 
 print('mean_absolute_error:', metrics.mean_absolute_error(y_test, y_pred))
 print('mean_squared_error:', metrics.mean_squared_error(y_test, y_pred))
-print('sqrt of mean_squared_error:', np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
+print('root mean_squared_error:', np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
 
 #print(X_test.iloc[[1]])
 #print(y_test.iloc[[1]]) # 29
