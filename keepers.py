@@ -60,12 +60,6 @@ plt.show()  # Highest=2 & 24
 estimator = KNeighborsClassifier(n_neighbors=24)
 estimator.fit(X_train, y_train.values.ravel())
 
-#print(estimator.intercept_)
-#print(estimator.coef_)
-#z = zip(feature_cols, estimator.coef_[0])
-#z = set(z)
-#print(z)
-
 y_pred = estimator.predict(X_test)
 
 print('mean_absolute_error:', metrics.mean_absolute_error(y_test, y_pred))
