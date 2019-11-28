@@ -55,7 +55,7 @@ for k in k_range:
 plt.plot(k_range, scores)
 plt.xlabel('k')
 plt.ylabel('Accuracy')
-plt.show()  # Highest=24
+plt.show()  # Highest=2 & 24
 
 estimator = KNeighborsClassifier(n_neighbors=24)
 estimator.fit(X_train, y_train.values.ravel())
