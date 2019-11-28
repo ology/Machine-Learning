@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn import metrics
 
 data = pd.read_csv('keepers.csv', sep='\t')
@@ -28,26 +28,30 @@ feature_cols = ['age', 'seasons', 'mins', 'apps', 'minapp', 'starts', 'subs', 'g
 response_col = ['rank']
 
 X = data[feature_cols]
+#print(X.shape)
 y = data[response_col]
+#print(y.shape)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=1)
 
-#print(X_train)
-#print(X_test)
-#print(y_test)
-#print(y_train)
-#print(X_train.shape, y_train.shape)
-#print(X_test.shape, y_test.shape)
-#print(np.isnan(X_train))
+#print('X_train:', X_train)
+#print('X_train.shape:', X_train.shape)
+#print('y_train:', y_train)
+#print('y_train.shape:', y_train.shape)
+#print('X_test:', X_test)
+#print('y_test:', y_test)
+#print('X_train.shape, y_train.shape:', X_train.shape, y_train.shape)
+#print('X_test.shape, y_test.shape:', X_test.shape, y_test.shape)
+#print('isnan(X_train):', np.isnan(X_train))
 
-estimator = LinearRegression()
-estimator.fit(X_train, y_train)
+estimator = KNeighborsClassifier(n_neighbors=1)
+estimator.fit(X_train, y_train.values.ravel())
 
 #print(estimator.intercept_)
 #print(estimator.coef_)
-z = zip(feature_cols, estimator.coef_[0])
-z = set(z)
-print(z)
+#z = zip(feature_cols, estimator.coef_[0])
+#z = set(z)
+#print(z)
 
 y_pred = estimator.predict(X_test)
 
@@ -61,7 +65,7 @@ datum = data.iloc[[88]]
 #print(datum)
 X = datum[feature_cols]
 y_pred = estimator.predict(X)
-print('Prediction:', y_pred) # 25.95248441
+print('Prediction (29):', y_pred) # 27
 
 #print(X_test.iloc[[2]])
 #print(y_test.iloc[[2]]) # 18
@@ -69,4 +73,4 @@ datum = data.iloc[[163]]
 #print(datum)
 X = datum[feature_cols]
 y_pred = estimator.predict(X)
-print('Prediction:', y_pred) # 13.79459475
+print('Prediction (18):', y_pred) # 16
