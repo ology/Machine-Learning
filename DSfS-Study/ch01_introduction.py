@@ -1,3 +1,5 @@
+# https://github.com/joelgrus/data-science-from-scratch
+
 from collections import defaultdict, Counter
 
 users = [
