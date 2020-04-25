@@ -11,6 +11,7 @@ use namespace::clean;
 with 'Data::Science::FromScratch::LinearAlgebra';
 with 'Data::Science::FromScratch::Statistics';
 with 'Data::Science::FromScratch::Probability';
+with 'Data::Science::FromScratch::Inference';
 
 =head1 SYNOPSIS
 
@@ -39,5 +40,7 @@ L<Data::Science::FromScratch::LinearAlgebra>
 L<Data::Science::FromScratch::Statistics>
 
 L<Data::Science::FromScratch::Probability>
+
+L<Data::Science::FromScratch::Inference>
 
 =cut
