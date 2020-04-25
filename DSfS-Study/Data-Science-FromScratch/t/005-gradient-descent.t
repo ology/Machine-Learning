@@ -26,8 +26,9 @@ my @inputs;
 push @inputs, [$_, 20 * $_ + 5]
     for -50 .. 49;
 
-$v = [ 0 + uniform(-1, 1), 0 + uniform(-1, 1)];
 my $rate = 0.001;
+
+$v = [ 0 + uniform(-1, 1), 0 + uniform(-1, 1)];
 for my $i (1 .. 5000) {
     my @linear_gradients;
     for my $j (@inputs) {
