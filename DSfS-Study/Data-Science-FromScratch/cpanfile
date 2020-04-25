@@ -3,7 +3,6 @@ requires "List::Util";
 requires "Math::Erf::Approx";
 requires "Math::Trig";
 requires "Moo";
-requires "Moo::Role";
 requires "Statistics::Distribution::Generator";
 requires "namespace::clean";
 requires "strictures";
