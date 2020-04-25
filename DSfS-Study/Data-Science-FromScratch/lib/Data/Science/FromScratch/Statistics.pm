@@ -30,15 +30,15 @@ use strictures 2;
 
   $v = $ds->de_mean(1,2,3); # [-1,0,1]
 
-  $x = $ds->variance(@data); # 2.5538...
+  $x = $ds->variance(@data); # 2.5538
 
-  $x = $ds->standard_deviation(@data); # 1.5981...
+  $x = $ds->standard_deviation(@data); # 1.5981
 
   $x = $ds->interquartile_range(@data); # 2
 
-  $x = $ds->covariance(\@data, \@data2); # 2.5538...
+  $x = $ds->covariance(\@data, \@data2); # 2.5538
 
-  $x = $ds->correlation(\@data, \@data2); # 0.2474...
+  $x = $ds->correlation(\@data, \@data2); # 0.2474
 
 =head1 METHODS
 

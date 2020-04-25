@@ -15,13 +15,13 @@ use strictures 2;
   $x = $ds->uniform_cdf(0.5); # 0.5
   $x = $ds->uniform_cdf(1); # 1
 
-  $x = $ds->normal_pdf(-1, 0, 1); # 0.2420...
-  $x = $ds->normal_pdf(0, 0, 1); # 0.3989...
-  $x = $ds->normal_pdf(1, 0, 1); # 0.2420...
+  $x = $ds->normal_pdf(-1, 0, 1); # 0.2420
+  $x = $ds->normal_pdf(0, 0, 1); # 0.3989
+  $x = $ds->normal_pdf(1, 0, 1); # 0.2420
 
-  $x = $ds->normal_cdf(-1, 0, 1); # 0.1589...
+  $x = $ds->normal_cdf(-1, 0, 1); # 0.1589
   $x = $ds->normal_cdf(0, 0, 1); # 0.5
-  $x = $ds->normal_cdf(1, 0, 1); # 0.8411...
+  $x = $ds->normal_cdf(1, 0, 1); # 0.8411
 
   #$x = inverse_normal_cdf($n, $mu, $sigma, $tolerance); # TODO
 
