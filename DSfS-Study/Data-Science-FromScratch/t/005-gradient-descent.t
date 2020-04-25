@@ -9,6 +9,11 @@ use_ok 'Data::Science::FromScratch';
 
 my $ds = new_ok 'Data::Science::FromScratch';
 
+my $lower_slope     = 19.9;
+my $upper_slope     = 20.1;
+my $lower_intercept = 4.9;
+my $upper_intercept = 5.1;
+
 my $v = [ map { 0 + uniform(-10, 10) } 1 .. 3 ];
 for my $i (1 .. 1000) {
     my $grad = $ds->doubled_gradient($v);
@@ -33,8 +38,8 @@ for my $i (1 .. 5000) {
 #    diag "$i. @$v";
 }
 my ($slope, $intercept) = @$v;
-ok 19.9 < $slope && $slope < 20.1, 'slope';
-ok 4.9 < $intercept && $intercept < 5.1, 'intercept';
+ok $lower_slope < $slope && $slope < $upper_slope, 'slope';
+ok $lower_intercept < $intercept && $intercept < $upper_intercept, 'intercept';
 
 $v = [ 0 + uniform(-1, 1), 0 + uniform(-1, 1)];
 for my $i (1 .. 5000) {
@@ -50,8 +55,8 @@ for my $i (1 .. 5000) {
 #    diag "$i. @$v";
 }
 ($slope, $intercept) = @$v;
-ok 19.9 < $slope && $slope < 20.1, 'slope';
-ok 4.9 < $intercept && $intercept < 5.1, 'intercept';
+ok $lower_slope < $slope && $slope < $upper_slope, 'slope';
+ok $lower_intercept < $intercept && $intercept < $upper_intercept, 'intercept';
 
 $v = [ 0 + uniform(-1, 1), 0 + uniform(-1, 1)];
 for my $i (1 .. 100) {
@@ -62,7 +67,7 @@ for my $i (1 .. 100) {
 #    diag "$i. @$v";
 }
 ($slope, $intercept) = @$v;
-ok 19.9 < $slope && $slope < 20.1, 'slope';
-ok 4.9 < $intercept && $intercept < 5.1, 'intercept';
+ok $lower_slope < $slope && $slope < $upper_slope, 'slope';
+ok $lower_intercept < $intercept && $intercept < $upper_intercept, 'intercept';
 
 done_testing();
