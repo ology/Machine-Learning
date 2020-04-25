@@ -46,6 +46,6 @@ $got = $ds->recall(@x_data);
 is sprintf('%.4f', $got), '0.0050', 'recall';
 
 $got = $ds->f1_score(@x_data);
-is sprintf('%.4f', $got), '0.0050', 'f1_score';
+is sprintf('%.4f', $got), '0.0074', 'f1_score';
 
 done_testing();
