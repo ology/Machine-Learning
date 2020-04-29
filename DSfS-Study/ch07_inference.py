@@ -1,6 +1,6 @@
 from typing import Tuple
 import math
-from ch04_probability import normal_cdf, inverse_normal_cdf
+from ch06_probability import normal_cdf, inverse_normal_cdf
 
 def normal_approximation_to_binomial(n: int, p: float) -> Tuple[float, float]:
     """Returns mu and sigma corresponding to a Binomial(n, p)"""

@@ -1,6 +1,6 @@
 from typing import List
 from collections import Counter
-from ch02_linear_algebra import sum_of_squares, dot
+from ch04_linear_algebra import sum_of_squares, dot
 import math
 
 x_list = [5, 1, 10, 2, 9, 5, 2]
