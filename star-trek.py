@@ -1,4 +1,4 @@
-# Write-up: http://techn.ology.net/predicting-star-trek-tos-spoken-lines-with-scikit-learn/
+# Write-up: https://ology.github.io/2020/03/03/predicting-star-trek-characters-with-naive-bayes/
 
 # LOAD FILES INTO A DATAFRAME
 import pandas as pd
