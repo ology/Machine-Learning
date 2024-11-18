@@ -66,6 +66,7 @@ def hot2fen(lookup_hot, hot):
 if __name__ == "__main__":
     squares_n = 64
     pieces_n = 12
+    squares_pieces = squares_n * pieces_n
     blacks = ['p','n','b','r','q','k']
     whites = ['P','N','B','R','Q','K']
 
@@ -81,10 +82,10 @@ if __name__ == "__main__":
         game = chess.pgn.read_game(content)
         board = game.board()
         i = 0
-        positions = []
+        positions = np.zeros((768, 100000), dtype=bool)
         for move in game.mainline_moves():
             board.push(move)
-            hot = fen2hot(lookup_fen, board.fen()).reshape((squares_n * pieces_n,))
+            hot = fen2hot(lookup_fen, board.fen()).reshape((squares_pieces,))
             positions[:i] = hot
             i = i + 1
         print(len(positions))
