@@ -68,7 +68,7 @@ if __name__ == "__main__":
     size = 8
     squares_n = size * size
     pieces_n = 12
-    squares_pieces = squares_n * pieces_n
+    dim = squares_n * pieces_n
     blacks = ['p','n','b','r','q','k']
     whites = ['P','N','B','R','Q','K']
     pieces = blacks + whites
@@ -85,10 +85,10 @@ if __name__ == "__main__":
         game = chess.pgn.read_game(content)
         board = game.board()
         i = 0
-        positions = [] #np.zeros((squares_pieces, 100000), dtype=bool)
+        positions = [] #np.zeros((dim, 100000), dtype=bool)
         for move in game.mainline_moves():
             board.push(move)
-            hot = fen2hot(lookup_fen, board.fen()).reshape((squares_pieces,))
+            hot = fen2hot(lookup_fen, board.fen()).reshape((dim,))
             positions[:i] = hot
             i = i + 1
         print(len(positions))
