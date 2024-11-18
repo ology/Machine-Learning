@@ -1,5 +1,6 @@
 import chess.pgn
 import numpy as np
+import pandas as pd
 import sys
 
 def make_lookup(pieces_n, blacks, whites):
@@ -64,11 +65,13 @@ def hot2fen(lookup_hot, hot):
     return board
 
 if __name__ == "__main__":
-    squares_n = 64
+    size = 8
+    squares_n = size * size
     pieces_n = 12
     squares_pieces = squares_n * pieces_n
     blacks = ['p','n','b','r','q','k']
     whites = ['P','N','B','R','Q','K']
+    pieces = blacks + whites
 
     lookup_fen, lookup_hot = make_lookup(pieces_n, blacks, whites)
     lookup_fen_swap, lookup_hot_swap = make_lookup(pieces_n, whites, blacks)
