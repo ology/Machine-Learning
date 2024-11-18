@@ -85,7 +85,7 @@ if __name__ == "__main__":
         game = chess.pgn.read_game(content)
         board = game.board()
         i = 0
-        positions = [] #np.zeros((dim, 100000), dtype=bool)
+        positions = []
         for move in game.mainline_moves():
             board.push(move)
             hot = fen2hot(lookup_fen, board.fen()).reshape((dim,))
@@ -96,4 +96,3 @@ if __name__ == "__main__":
     encoded_df = pd.DataFrame(positions)
     probabilities_df = encoded_df.div(encoded_df.sum(axis=1), axis=0)
     print(probabilities_df)
-    
