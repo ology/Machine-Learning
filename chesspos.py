@@ -1,6 +1,7 @@
 import chess.pgn
 import numpy as np
 import pandas as pd
+import re
 import sys
 
 def make_lookup(pieces_n, blacks, whites):
@@ -80,19 +81,29 @@ if __name__ == "__main__":
     # print(x,y)
 
     pgns = sys.argv[1:]
+    i = 0
     for pgn in pgns:
+        i = i + 1
         content = open(pgn)
-        game = chess.pgn.read_game(content)
-        board = game.board()
-        i = 0
-        positions = []
-        for move in game.mainline_moves():
-            board.push(move)
-            hot = fen2hot(lookup_fen, board.fen()).reshape((dim,))
-            positions[:i] = hot
-            i = i + 1
-        print(len(positions))
+        try:
+            game = chess.pgn.read_game(content)
+        except:
+            continue
+        if re.search('kasparov', game.headers["White"], re.IGNORECASE):
+            player = 1
+        else:
+            player = 0
+        print(i, pgn, game.headers['White'], 'vs', game.headers['Black'], player)
+        # board = game.board()
+    #     i = 0
+    #     positions = []
+    #     for move in game.mainline_moves():
+    #         board.push(move)
+    #         hot = fen2hot(lookup_fen, board.fen()).reshape((dim,))
+    #         positions[:i] = hot
+    #         i = i + 1
+    #     print(len(positions))
 
-    encoded_df = pd.DataFrame(positions)
-    probabilities_df = encoded_df.div(encoded_df.sum(axis=1), axis=0)
-    print(probabilities_df)
+    # encoded_df = pd.DataFrame(positions)
+    # probabilities_df = encoded_df.div(encoded_df.sum(axis=1), axis=0)
+    # print(probabilities_df)
