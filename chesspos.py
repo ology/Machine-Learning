@@ -92,3 +92,8 @@ if __name__ == "__main__":
             positions[:i] = hot
             i = i + 1
         print(len(positions))
+
+    encoded_df = pd.DataFrame(positions)
+    probabilities_df = encoded_df.div(encoded_df.sum(axis=1), axis=0)
+    print(probabilities_df)
+    
