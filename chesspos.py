@@ -1,32 +1,31 @@
-import chess
+import chess.pgn
 import numpy as np
+import sys
 
-squares_n = 64
-pieces_n = 12
-pieces = ['p','n','b','r','q','k','P','N','B','R','Q','K']
-lookup_fen = {}
-# 'p': np.array([1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=bool),
-# 'n': np.array([0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=bool),
-# ...
-# 'K': np.array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], dtype=bool),
-for i, piece in enumerate(pieces):
-    mask = np.zeros(pieces_n, dtype=int)
-    mask[i] = 1
-    lookup_fen[piece] = np.array(mask, dtype=bool)
-# print(lookup_fen)
+def make_lookup(pieces_n, blacks, whites):
+    lookup_fen = {}
+    pieces = blacks + whites
+    # 'p': np.array([1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=bool),
+    # 'n': np.array([0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=bool),
+    # ...
+    # 'K': np.array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], dtype=bool),
+    for i, piece in enumerate(pieces):
+        mask = np.zeros(pieces_n, dtype=int)
+        mask[i] = 1
+        lookup_fen[piece] = np.array(mask, dtype=bool)
+    # print(lookup_fen)
+    # TODO What/why
+    lookup_hot = {tuple(value): key for key, value in lookup_fen.items()}
+    lookup_hot[tuple([False for _ in range(pieces_n)])] = None
+    return lookup_fen, lookup_hot
 
-# TODO ...
-lookup_hot = {tuple(value): key for key, value in lookup_fen.items()}
-lookup_hot[tuple([False for _ in range(pieces_n)])] = None
-# print(lookup_hot)
-
-def piece2vec(piece):
+def piece2vec(lookup_fen, piece):
     return lookup_fen.get(piece, None)
 
-def vec2piece(vec):
+def vec2piece(lookup_hot, vec):
     return lookup_hot[tuple(vec)]
 
-def fen2hot(fen):
+def fen2hot(lookup_fen, fen):
     i = 0
     board = np.zeros((squares_n, pieces_n), dtype=bool)
     for p in fen:
@@ -34,7 +33,7 @@ def fen2hot(fen):
             break
         if p == '/':
             continue
-        encoding = piece2vec(p)
+        encoding = piece2vec(lookup_fen, p)
         if encoding is not None:
             board[i, :] = encoding
             i = i + 1
@@ -42,7 +41,7 @@ def fen2hot(fen):
             i = i + int(p)
     return board
 
-def hot2fen(hot):
+def hot2fen(lookup_hot, hot):
     j = 0
     board = ''
     for i in range(squares_n):
@@ -51,7 +50,7 @@ def hot2fen(hot):
                 board += str(j)
                 j = 0
             board += '/'
-        key = vec2piece(hot[i, :])
+        key = vec2piece(lookup_hot, hot[i, :])
         if key is not None:
             if not j == 0:
                 board += str(j)
@@ -65,7 +64,26 @@ def hot2fen(hot):
     return board
 
 if __name__ == "__main__":
-    x = fen2hot(chess.STARTING_FEN)
-    # print(x)
-    y = hot2fen(x)
-    print(y)
+    squares_n = 64
+    pieces_n = 12
+    blacks = ['p','n','b','r','q','k']
+    whites = ['P','N','B','R','Q','K']
+
+    lookup_fen, lookup_hot = make_lookup(pieces_n, blacks, whites)
+    # x = fen2hot(lookup_fen, chess.STARTING_FEN)
+    # y = hot2fen(lookup_hot, x)
+    # print(x,y)
+
+    pgns = sys.argv[1:]
+    for pgn in pgns:
+        content = open(pgn)
+        game = chess.pgn.read_game(content)
+        board = game.board()
+        i = 0
+        positions = []
+        for move in game.mainline_moves():
+            board.push(move)
+            hot = fen2hot(lookup_fen, board.fen()).reshape((768,))
+            positions[:i] = hot
+            i = i + 1
+        print(len(positions))
