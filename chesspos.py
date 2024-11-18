@@ -82,7 +82,7 @@ if __name__ == "__main__":
         game = chess.pgn.read_game(content)
         board = game.board()
         i = 0
-        positions = np.zeros((768, 100000), dtype=bool)
+        positions = [] #np.zeros((squares_pieces, 100000), dtype=bool)
         for move in game.mainline_moves():
             board.push(move)
             hot = fen2hot(lookup_fen, board.fen()).reshape((squares_pieces,))
