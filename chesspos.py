@@ -70,6 +70,7 @@ if __name__ == "__main__":
     whites = ['P','N','B','R','Q','K']
 
     lookup_fen, lookup_hot = make_lookup(pieces_n, blacks, whites)
+    lookup_fen_swap, lookup_hot_swap = make_lookup(pieces_n, whites, blacks)
     # x = fen2hot(lookup_fen, chess.STARTING_FEN)
     # y = hot2fen(lookup_hot, x)
     # print(x,y)
@@ -83,7 +84,7 @@ if __name__ == "__main__":
         positions = []
         for move in game.mainline_moves():
             board.push(move)
-            hot = fen2hot(lookup_fen, board.fen()).reshape((768,))
+            hot = fen2hot(lookup_fen, board.fen()).reshape((squares_n * pieces_n,))
             positions[:i] = hot
             i = i + 1
         print(len(positions))
