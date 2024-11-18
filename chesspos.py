@@ -1,14 +1,14 @@
 import chess
 import numpy as np
 
-# 'p': np.array([1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=bool),
-# 'n': np.array([0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=bool),
-# ...
-# 'K': np.array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], dtype=bool),
 squares_n = 64
 pieces_n = 12
 pieces = ['p','n','b','r','q','k','P','N','B','R','Q','K']
 lookup_fen = {}
+# 'p': np.array([1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=bool),
+# 'n': np.array([0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=bool),
+# ...
+# 'K': np.array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], dtype=bool),
 for i, piece in enumerate(pieces):
     mask = np.zeros(pieces_n, dtype=int)
     mask[i] = 1
