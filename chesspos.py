@@ -17,7 +17,6 @@ for i, piece in enumerate(pieces):
 
 # TODO ...
 lookup_hot = {tuple(value): key for key, value in lookup_fen.items()}
-# print(lookup_hot)
 lookup_hot[tuple([False for _ in range(pieces_n)])] = None
 # print(lookup_hot)
 
