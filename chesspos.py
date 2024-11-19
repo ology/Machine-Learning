@@ -99,10 +99,10 @@ if __name__ == "__main__":
         for move in game.mainline_moves():
             if (board.turn == chess.WHITE and player == chess.WHITE) or (board.turn == chess.BLACK and player == chess.BLACK):
                 key = fen
-                board.push(move)
-                val = board.fen()
                 if not key in pairs:
                     pairs[key] = []
+                board.push(move)
+                val = board.fen()
                 pairs[key].append(val)
             else:
                 board.push(move)
