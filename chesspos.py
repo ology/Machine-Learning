@@ -1,7 +1,7 @@
 import chess.pgn
 import numpy as np
-import pandas as pd
 import re
+from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 import sys
 
@@ -83,7 +83,8 @@ if __name__ == "__main__":
 
     pgns = sys.argv[1:]
     # pairs = {}
-    data = []
+    X = []
+    Y = []
     i = 0
     for pgn in pgns:
         content = open(pgn)
@@ -108,13 +109,19 @@ if __name__ == "__main__":
                 val = board.fen()
                 # pairs[key].append(val)
                 if player == chess.WHITE:
-                    data.append([ fen2hot(lookup_fen, key), fen2hot(lookup_fen, val) ])
+                    X.append(fen2hot(lookup_fen, key))
+                    Y.append(fen2hot(lookup_fen, val))
                 else:
-                    data.append([ fen2hot(lookup_fen_swap, key), fen2hot(lookup_fen_swap, val) ])
+                    X.append(fen2hot(lookup_fen_swap, key))
+                    Y.append(fen2hot(lookup_fen_swap, val))
             else:
                 board.push(move)
                 fen = board.fen()
     # print(len(pairs))
+    print(X)
 
-    df = pd.DataFrame(data)
-    train_test_split(df, train_size = 0.8)
+    x_train, x_test, y_train, y_test = train_test_split(X, Y, train_size = 0.8)
+    # print(x_train) #, x_test, y_train, y_test)
+    # model = LinearRegression().fit(x_train, y_train)
+    # model.score(x_train, y_train)
+    # model.score(x_test, y_test)
