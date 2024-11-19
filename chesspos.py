@@ -1,7 +1,7 @@
 import chess.pgn
 import numpy as np
 import re
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn.model_selection import train_test_split
 import sys
 
@@ -124,7 +124,8 @@ if __name__ == "__main__":
     y_data = np.array(Y).reshape(len(Y), -1)
 
     x_train, x_test, y_train, y_test = train_test_split(x_data, y_data, train_size = 0.8)
-    model = LinearRegression().fit(x_train, y_train)
+    # model = LinearRegression().fit(x_train, y_train)
+    model = LogisticRegression().fit(x_train, y_train)
     train = model.score(x_train, y_train)
     test = model.score(x_test, y_test)
     print(train, test)
