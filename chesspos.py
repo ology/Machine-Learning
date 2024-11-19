@@ -14,6 +14,7 @@ def process_pgns(pgns):
     X = []
     Y = []
     i = 0
+    limit = 3 # limit j number of moves below
     for pgn in pgns:
         content = open(pgn)
         try:
@@ -28,8 +29,12 @@ def process_pgns(pgns):
             fen = chess.STARTING_FEN
         else:
             player = chess.BLACK
+        j = 0
         for move in game.mainline_moves():
+            if j >= limit:
+                break
             if (board.turn == chess.WHITE and player == chess.WHITE) or (board.turn == chess.BLACK and player == chess.BLACK):
+                j = j + 1
                 key = fen
                 board.push(move)
                 val = board.fen()
