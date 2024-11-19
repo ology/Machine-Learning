@@ -2,7 +2,7 @@ import chess.pgn
 import matplotlib.pyplot as plt
 import numpy as np
 import re
-from sklearn.linear_model import LinearRegression, PoissonRegressor
+from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 import sys
 
@@ -110,11 +110,11 @@ if __name__ == "__main__":
                 val = board.fen()
                 # pairs[key].append(val)
                 if player == chess.WHITE:
-                    X.append(fen2hot(lookup_fen, key))
-                    Y.append(fen2hot(lookup_fen, val))
+                    X.append(fen2hot(lookup_fen, key).reshape((dim,)))
+                    Y.append(fen2hot(lookup_fen, val).reshape((dim,)))
                 else:
-                    X.append(fen2hot(lookup_fen_swap, key))
-                    Y.append(fen2hot(lookup_fen_swap, val))
+                    X.append(fen2hot(lookup_fen_swap, key).reshape((dim,)))
+                    Y.append(fen2hot(lookup_fen_swap, val).reshape((dim,)))
             else:
                 board.push(move)
                 fen = board.fen()
@@ -124,17 +124,20 @@ if __name__ == "__main__":
     # x_data = np.array(X).reshape(len(X), -1)
     # y_data = np.array(Y).reshape(len(Y), -1)
 
-    # x_train, x_test, y_train, y_test = train_test_split(x_data, y_data, train_size = 0.8)
-    # model = LinearRegression().fit(x_train, y_train)
-    # train_score = model.score(x_train, y_train)
-    # test_score = model.score(x_test, y_test)
-    # print(train_score, test_score)
+    x_train, x_test, y_train, y_test = train_test_split(X, Y, train_size = 0.8)
+    model = LinearRegression().fit(x_train, y_train)
+    train_score = model.score(x_train, y_train)
+    test_score = model.score(x_test, y_test)
+    print(train_score, test_score)
     # y_pred = model.predict(x_test)
 
-    # plt.scatter(x_test, y_test, color='b')
+    x = fen2hot(lookup_fen, chess.STARTING_FEN).reshape((1, dim))
+    # print(x.shape)
+    y = model.predict(x)
+    # print(y.reshape((squares_n, pieces_n)))
+    z = hot2fen(lookup_hot, y.reshape((squares_n, pieces_n)))
+    print(z)
+
+    # plt.scatter(x_test, y_pred, color='b')
     # plt.plot(x_test, y_pred, color='k')
     # plt.show()
-
-    model = PoissonRegressor().fit(X, Y)
-    score = model.score(X, Y)
-    print(score)
