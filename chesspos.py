@@ -118,10 +118,13 @@ if __name__ == "__main__":
                 board.push(move)
                 fen = board.fen()
     # print(len(pairs))
-    print(X)
+    # print(len(X[0]), len(Y[0]))
 
-    x_train, x_test, y_train, y_test = train_test_split(X, Y, train_size = 0.8)
+    x_data = np.array(X).reshape(len(X), -1)
+    y_data = np.array(Y).reshape(len(Y), -1)
+
+    x_train, x_test, y_train, y_test = train_test_split(x_data, y_data, train_size = 0.8)
     # print(x_train) #, x_test, y_train, y_test)
-    # model = LinearRegression().fit(x_train, y_train)
+    model = LinearRegression().fit(x_train, y_train)
     # model.score(x_train, y_train)
     # model.score(x_test, y_test)
