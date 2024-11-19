@@ -124,7 +124,7 @@ if __name__ == "__main__":
     y_data = np.array(Y).reshape(len(Y), -1)
 
     x_train, x_test, y_train, y_test = train_test_split(x_data, y_data, train_size = 0.8)
-    # print(x_train) #, x_test, y_train, y_test)
     model = LinearRegression().fit(x_train, y_train)
-    # model.score(x_train, y_train)
-    # model.score(x_test, y_test)
+    train = model.score(x_train, y_train)
+    test = model.score(x_test, y_test)
+    print(train, test)
