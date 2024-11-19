@@ -2,6 +2,7 @@ import chess.pgn
 import numpy as np
 import pandas as pd
 import re
+from sklearn.model_selection import train_test_split
 import sys
 
 def make_lookup(pieces_n, blacks, whites):
@@ -81,15 +82,17 @@ if __name__ == "__main__":
     # print(x,y)
 
     pgns = sys.argv[1:]
-    pairs = {}
+    # pairs = {}
+    data = []
     i = 0
     for pgn in pgns:
-        i = i + 1
         content = open(pgn)
         try:
             game = chess.pgn.read_game(content)
         except:
             continue
+        i = i + 1
+        print(i, pgn, game.headers['White'], 'vs', game.headers['Black'])
         board = game.board()
         if re.search('kasparov', game.headers["White"], re.IGNORECASE):
             player = chess.WHITE
@@ -99,16 +102,15 @@ if __name__ == "__main__":
         for move in game.mainline_moves():
             if (board.turn == chess.WHITE and player == chess.WHITE) or (board.turn == chess.BLACK and player == chess.BLACK):
                 key = fen
-                if not key in pairs:
-                    pairs[key] = []
+                # if not key in pairs:
+                #     pairs[key] = []
                 board.push(move)
                 val = board.fen()
-                pairs[key].append(val)
+                # pairs[key].append(val)
             else:
                 board.push(move)
                 fen = board.fen()
-        print(i, pgn, game.headers['White'], 'vs', game.headers['Black'])
-    print(len(pairs))
+    # print(len(pairs))
 
     #     i = 0
     #     positions = []
