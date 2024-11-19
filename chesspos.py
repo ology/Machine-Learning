@@ -107,10 +107,17 @@ if __name__ == "__main__":
                 board.push(move)
                 val = board.fen()
                 # pairs[key].append(val)
+                if player == chess.WHITE:
+                    data.append([ fen2hot(lookup_fen, key), fen2hot(lookup_fen, val) ])
+                else:
+                    data.append([ fen2hot(lookup_fen_swap, key), fen2hot(lookup_fen_swap, val) ])
             else:
                 board.push(move)
                 fen = board.fen()
     # print(len(pairs))
+
+    df = pd.DataFrame(data)
+    train_test_split(df, train_size = 0.8)
 
     #     i = 0
     #     positions = []
