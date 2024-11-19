@@ -107,8 +107,8 @@ if __name__ == "__main__":
             else:
                 board.push(move)
                 fen = board.fen()
-        print(i, pgn, game.headers['White'], 'vs', game.headers['Black'], player)
-    print(pairs)
+        print(i, pgn, game.headers['White'], 'vs', game.headers['Black'])
+    print(len(pairs))
 
     #     i = 0
     #     positions = []
