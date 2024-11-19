@@ -131,6 +131,6 @@ if __name__ == "__main__":
     print(train_score, test_score)
     y_pred = model.predict(x_test)
 
-    plt.scatter(x_test, y_test, color ='b')
-    plt.plot(x_test, y_pred, color ='k')
+    plt.scatter(x_test, y_test, color='b')
+    plt.plot(x_test, y_pred, color='k')
     plt.show()
