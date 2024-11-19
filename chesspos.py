@@ -10,16 +10,7 @@ from sklearn.model_selection import ShuffleSplit
 from sklearn.model_selection import train_test_split
 import sys
 
-if __name__ == "__main__":
-    size = 8
-    squares_n = size * size
-    pieces_n = 12
-    dim = squares_n * pieces_n
-    blacks = ['p','n','b','r','q','k']
-    whites = ['P','N','B','R','Q','K']
-    pieces = blacks + whites
-
-    pgns = sys.argv[1:]
+def process_pgns(pgns):
     X = []
     Y = []
     i = 0
@@ -50,7 +41,20 @@ if __name__ == "__main__":
             else:
                 board.push(move)
                 fen = board.fen()
-    # print(X[0], Y[0])
+    return X, Y
+
+if __name__ == "__main__":
+    size = 8
+    squares_n = size * size
+    pieces_n = 12
+    dim = squares_n * pieces_n
+    blacks = ['p','n','b','r','q','k']
+    whites = ['P','N','B','R','Q','K']
+    pieces = blacks + whites
+
+    pgns = sys.argv[1:]
+    X, Y = process_pgns(pgns)
+    print(X[0], Y[0])
 
     x_df = pd.DataFrame(X)
     y_df = pd.DataFrame(Y)
