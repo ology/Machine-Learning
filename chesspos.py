@@ -1,71 +1,12 @@
 import chess.pgn
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 import re
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OneHotEncoder
 import sys
-
-def make_lookup(pieces_n, blacks, whites):
-    lookup_fen = {}
-    pieces = blacks + whites
-    # 'p': np.array([1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=bool),
-    # 'n': np.array([0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=bool),
-    # ...
-    # 'K': np.array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], dtype=bool),
-    for i, piece in enumerate(pieces):
-        mask = np.zeros(pieces_n, dtype=int)
-        mask[i] = 1
-        lookup_fen[piece] = np.array(mask, dtype=bool)
-    # print(lookup_fen)
-    # TODO What/why
-    lookup_hot = {tuple(value): key for key, value in lookup_fen.items()}
-    lookup_hot[tuple([False for _ in range(pieces_n)])] = None
-    return lookup_fen, lookup_hot
-
-def piece2vec(lookup_fen, piece):
-    return lookup_fen.get(piece, None)
-
-def vec2piece(lookup_hot, vec):
-    return lookup_hot[tuple(vec)]
-
-def fen2hot(lookup_fen, fen):
-    i = 0
-    board = np.zeros((squares_n, pieces_n), dtype=bool)
-    for p in fen:
-        if p == ' ':
-            break
-        if p == '/':
-            continue
-        encoding = piece2vec(lookup_fen, p)
-        if encoding is not None:
-            board[i, :] = encoding
-            i = i + 1
-        else:
-            i = i + int(p)
-    return board
-
-def hot2fen(lookup_hot, hot):
-    j = 0
-    board = ''
-    for i in range(squares_n):
-        if i % 8 == 0 and i > 0:
-            if j > 0:
-                board += str(j)
-                j = 0
-            board += '/'
-        key = vec2piece(lookup_hot, hot[i, :])
-        if key is not None:
-            if not j == 0:
-                board += str(j)
-                j = 0
-            board += key
-        else:
-            j += 1
-    if not j == 0:
-        board += str(j)
-        j = 0
-    return board
 
 if __name__ == "__main__":
     size = 8
@@ -76,14 +17,7 @@ if __name__ == "__main__":
     whites = ['P','N','B','R','Q','K']
     pieces = blacks + whites
 
-    lookup_fen, lookup_hot = make_lookup(pieces_n, blacks, whites)
-    lookup_fen_swap, lookup_hot_swap = make_lookup(pieces_n, whites, blacks)
-    # x = fen2hot(lookup_fen, chess.STARTING_FEN)
-    # y = hot2fen(lookup_hot, x)
-    # print(x,y)
-
     pgns = sys.argv[1:]
-    # pairs = {}
     X = []
     Y = []
     i = 0
@@ -104,39 +38,44 @@ if __name__ == "__main__":
         for move in game.mainline_moves():
             if (board.turn == chess.WHITE and player == chess.WHITE) or (board.turn == chess.BLACK and player == chess.BLACK):
                 key = fen
-                # if not key in pairs:
-                #     pairs[key] = []
                 board.push(move)
                 val = board.fen()
-                # pairs[key].append(val)
-                if player == chess.WHITE:
-                    X.append(fen2hot(lookup_fen, key).reshape((dim,)))
-                    Y.append(fen2hot(lookup_fen, val).reshape((dim,)))
-                else:
-                    X.append(fen2hot(lookup_fen_swap, key).reshape((dim,)))
-                    Y.append(fen2hot(lookup_fen_swap, val).reshape((dim,)))
+                if player == chess.BLACK:
+                    key = key.swapcase()
+                    val = val.swapcase()
+                X.append(key)
+                Y.append(val)
             else:
                 board.push(move)
                 fen = board.fen()
-    # print(len(pairs))
-    # print(len(X[0]), len(Y[0]))
+    # print(X[0], Y[0])
 
-    # x_data = np.array(X).reshape(len(X), -1)
-    # y_data = np.array(Y).reshape(len(Y), -1)
+    x_df = pd.DataFrame(X)
+    y_df = pd.DataFrame(Y)
+    # print(x_df)
 
-    x_train, x_test, y_train, y_test = train_test_split(X, Y, train_size = 0.8)
+    encoder = OneHotEncoder()
+
+    x_encoded_data = encoder.fit_transform(x_df)
+    y_encoded_data = encoder.fit_transform(y_df)
+    # print(type(x_encoded_data))
+    x_encoded_df = pd.DataFrame(x_encoded_data.toarray())
+    y_encoded_df = pd.DataFrame(y_encoded_data.toarray())
+    # print(x_encoded_df.shape)
+
+    x_train, x_test, y_train, y_test = train_test_split(x_encoded_df, y_encoded_df, train_size = 0.8)
     model = LinearRegression().fit(x_train, y_train)
     train_score = model.score(x_train, y_train)
     test_score = model.score(x_test, y_test)
     print(train_score, test_score)
     # y_pred = model.predict(x_test)
 
-    x = fen2hot(lookup_fen, chess.STARTING_FEN).reshape((1, dim))
+    # x = fen2hot(lookup_fen, chess.STARTING_FEN).reshape((1, dim))
     # print(x.shape)
-    y = model.predict(x)
+    # y = model.predict(x)
     # print(y.reshape((squares_n, pieces_n)))
-    z = hot2fen(lookup_hot, y.reshape((squares_n, pieces_n)))
-    print(z)
+    # z = hot2fen(lookup_hot, y.reshape((squares_n, pieces_n)))
+    # print(z)
 
     # plt.scatter(x_test, y_pred, color='b')
     # plt.plot(x_test, y_pred, color='k')
