@@ -118,16 +118,3 @@ if __name__ == "__main__":
 
     df = pd.DataFrame(data)
     train_test_split(df, train_size = 0.8)
-
-    #     i = 0
-    #     positions = []
-    #     for move in game.mainline_moves():
-    #         board.push(move)
-    #         hot = fen2hot(lookup_fen, board.fen()).reshape((dim,))
-    #         positions[:i] = hot
-    #         i = i + 1
-    #     print(len(positions))
-
-    # encoded_df = pd.DataFrame(positions)
-    # probabilities_df = encoded_df.div(encoded_df.sum(axis=1), axis=0)
-    # print(probabilities_df)
