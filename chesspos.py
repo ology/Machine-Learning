@@ -4,8 +4,10 @@ import numpy as np
 import pandas as pd
 import re
 from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import ShuffleSplit
+from sklearn.model_selection import train_test_split
 import sys
 
 if __name__ == "__main__":
@@ -70,12 +72,8 @@ if __name__ == "__main__":
     print(train_score, test_score)
     # y_pred = model.predict(x_test)
 
-    # x = fen2hot(lookup_fen, chess.STARTING_FEN).reshape((1, dim))
-    # print(x.shape)
-    # y = model.predict(x)
-    # print(y.reshape((squares_n, pieces_n)))
-    # z = hot2fen(lookup_hot, y.reshape((squares_n, pieces_n)))
-    # print(z)
+    cv = ShuffleSplit(n_splits=5, test_size=0.2, random_state=0)
+    print(cross_val_score(LinearRegression(), x_encoded_df, y_encoded_df, cv=cv))
 
     # plt.scatter(x_test, y_pred, color='b')
     # plt.plot(x_test, y_pred, color='k')
