@@ -1,4 +1,5 @@
 import chess.pgn
+import matplotlib.pyplot as plt
 import numpy as np
 import re
 from sklearn.linear_model import LinearRegression
@@ -125,6 +126,11 @@ if __name__ == "__main__":
 
     x_train, x_test, y_train, y_test = train_test_split(x_data, y_data, train_size = 0.8)
     model = LinearRegression().fit(x_train, y_train)
-    train = model.score(x_train, y_train)
-    test = model.score(x_test, y_test)
-    print(train, test)
+    train_score = model.score(x_train, y_train)
+    test_score = model.score(x_test, y_test)
+    print(train_score, test_score)
+    y_pred = model.predict(x_test)
+
+    plt.scatter(x_test, y_test, color ='b')
+    plt.plot(x_test, y_pred, color ='k')
+    plt.show()
