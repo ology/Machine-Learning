@@ -73,7 +73,8 @@ if __name__ == "__main__":
     # y_pred = model.predict(x_test)
 
     cv = ShuffleSplit(n_splits=5, test_size=0.2, random_state=0)
-    print(cross_val_score(LinearRegression(), x_encoded_df, y_encoded_df, cv=cv))
+    cv_score = cross_val_score(LinearRegression(), x_encoded_df, y_encoded_df, cv=cv)
+    print(cv_score)
 
     # plt.scatter(x_test, y_pred, color='b')
     # plt.plot(x_test, y_pred, color='k')
