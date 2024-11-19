@@ -81,6 +81,7 @@ if __name__ == "__main__":
     # print(x,y)
 
     pgns = sys.argv[1:]
+    pairs = {}
     i = 0
     for pgn in pgns:
         i = i + 1
@@ -89,12 +90,26 @@ if __name__ == "__main__":
             game = chess.pgn.read_game(content)
         except:
             continue
+        board = game.board()
         if re.search('kasparov', game.headers["White"], re.IGNORECASE):
-            player = 1
+            player = chess.WHITE
+            fen = chess.STARTING_FEN
         else:
-            player = 0
+            player = chess.BLACK
+        for move in game.mainline_moves():
+            if (board.turn == chess.WHITE and player == chess.WHITE) or (board.turn == chess.BLACK and player == chess.BLACK):
+                key = fen
+                board.push(move)
+                val = board.fen()
+                if not key in pairs:
+                    pairs[key] = []
+                pairs[key].append(val)
+            else:
+                board.push(move)
+                fen = board.fen()
         print(i, pgn, game.headers['White'], 'vs', game.headers['Black'], player)
-        # board = game.board()
+    print(pairs)
+
     #     i = 0
     #     positions = []
     #     for move in game.mainline_moves():
