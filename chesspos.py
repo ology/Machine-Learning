@@ -2,7 +2,7 @@ import chess.pgn
 import matplotlib.pyplot as plt
 import numpy as np
 import re
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, PoissonRegressor
 from sklearn.model_selection import train_test_split
 import sys
 
@@ -121,16 +121,20 @@ if __name__ == "__main__":
     # print(len(pairs))
     # print(len(X[0]), len(Y[0]))
 
-    x_data = np.array(X).reshape(len(X), -1)
-    y_data = np.array(Y).reshape(len(Y), -1)
+    # x_data = np.array(X).reshape(len(X), -1)
+    # y_data = np.array(Y).reshape(len(Y), -1)
 
-    x_train, x_test, y_train, y_test = train_test_split(x_data, y_data, train_size = 0.8)
-    model = LinearRegression().fit(x_train, y_train)
-    train_score = model.score(x_train, y_train)
-    test_score = model.score(x_test, y_test)
-    print(train_score, test_score)
-    y_pred = model.predict(x_test)
+    # x_train, x_test, y_train, y_test = train_test_split(x_data, y_data, train_size = 0.8)
+    # model = LinearRegression().fit(x_train, y_train)
+    # train_score = model.score(x_train, y_train)
+    # test_score = model.score(x_test, y_test)
+    # print(train_score, test_score)
+    # y_pred = model.predict(x_test)
 
-    plt.scatter(x_test, y_test, color='b')
-    plt.plot(x_test, y_pred, color='k')
-    plt.show()
+    # plt.scatter(x_test, y_test, color='b')
+    # plt.plot(x_test, y_pred, color='k')
+    # plt.show()
+
+    model = PoissonRegressor().fit(X, Y)
+    score = model.score(X, Y)
+    print(score)
