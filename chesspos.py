@@ -54,7 +54,7 @@ if __name__ == "__main__":
 
     pgns = sys.argv[1:]
     X, Y = process_pgns(pgns)
-    print(X[0], Y[0])
+    # print(X[0], Y[0])
 
     x_df = pd.DataFrame(X)
     y_df = pd.DataFrame(Y)
