@@ -1,5 +1,6 @@
 import chess.pgn
 from matplotlib import pyplot as plt
+import numpy as np
 import pandas as pd
 from pandas import read_csv
 from pandas.plotting import scatter_matrix
@@ -69,31 +70,35 @@ if __name__ == "__main__":
 
     pgns = sys.argv[1:]
     X, Y = process_pgns(pgns)
-    # print(X[0], Y[0])
+    print(len(X), len(Y))
 
     x_df = pd.DataFrame(X)
     y_df = pd.DataFrame(Y)
+    print(x_df.shape, y_df.shape)
     # print(x_df)
 
-    encoder = OneHotEncoder()
+    # encoder = OneHotEncoder()
+    x_encoded_data = pd.get_dummies(x_df)
+    y_encoded_data = pd.get_dummies(y_df)
+    print(x_encoded_data.shape, y_encoded_data.shape)
 
-    x_encoded_data = encoder.fit_transform(x_df)
-    y_encoded_data = encoder.fit_transform(y_df)
     # print(type(x_encoded_data))
-    x_encoded_df = pd.DataFrame(x_encoded_data.toarray())
-    y_encoded_df = pd.DataFrame(y_encoded_data.toarray())
-    # print(x_encoded_df.shape)
+    x_encoded_df = pd.DataFrame(x_encoded_data)
+    y_encoded_df = pd.DataFrame(y_encoded_data)
+    # x_encoded_df = x_encoded_df.values.ravel()
+    # y_encoded_df = y_encoded_df.values.ravel()
+    print(x_encoded_df.shape, y_encoded_df.shape)
 
     X_train, X_test, Y_train, Y_test = train_test_split(x_encoded_df, y_encoded_df, train_size = 0.8)
-    
+
     # inspect algorithms
     models = []
     models.append(('  LR', LogisticRegression(solver='liblinear')))
-    models.append((' LDA', LinearDiscriminantAnalysis()))
-    models.append((' KNN', KNeighborsClassifier()))
-    models.append(('CART', DecisionTreeClassifier()))
-    models.append(('  NB', GaussianNB()))
-    models.append((' SVM', SVC(gamma='auto')))
+    # models.append((' LDA', LinearDiscriminantAnalysis()))
+    # models.append((' KNN', KNeighborsClassifier()))
+    # models.append(('CART', DecisionTreeClassifier()))
+    # models.append(('  NB', GaussianNB()))
+    # models.append((' SVM', SVC(gamma='auto')))
     print('Evaluate algorithms:')
     results = []
     names = []
