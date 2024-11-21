@@ -25,7 +25,7 @@ def process_pgns(pgns):
     X = []
     Y = []
     i = 0
-    limit = 5 # limit j number of moves below
+    limit = 3 # limit j number of moves below
     for pgn in pgns:
         content = open(pgn)
         try:
@@ -117,6 +117,6 @@ if __name__ == "__main__":
     # print('\nConfusion:\n', confusion_matrix(Y_test, predictions))
     # print('\nClassification:\n', classification_report(Y_test, predictions))
  
-    # plt.scatter(x_test, y_pred, color='b')
+    plt.scatter(X_test, predictions, color='b')
     # plt.plot(x_test, y_pred, color='k')
-    # plt.show()
+    plt.show()
