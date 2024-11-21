@@ -33,8 +33,8 @@ dataset['class'] = [ class_names[x] for x in iris.target ]
 # plt.show()
 
 values = dataset.values
-X = values[: ,0:4]
-y = values[: ,4]
+X = values[:, 0:4]
+y = values[:, 4]
 X_train, X_validation, Y_train, Y_validation = train_test_split(X, y, test_size=0.20, random_state=1)
 
 # inspect algorithms
