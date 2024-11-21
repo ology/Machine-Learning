@@ -84,8 +84,6 @@ if __name__ == "__main__":
 
     x_encoded_df = pd.DataFrame(x_encoded_data)
     y_encoded_df = pd.DataFrame(y_encoded_data)
-    # x_encoded_df = x_encoded_df.values.ravel()
-    # y_encoded_df = y_encoded_df.values.ravel()
     # print(x_encoded_df.shape, y_encoded_df.shape)
 
     X_train, X_test, Y_train, Y_test = train_test_split(x_encoded_df, y_encoded_df.iloc[:, 0], train_size = 0.8)
