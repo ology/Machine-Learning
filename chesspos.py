@@ -16,7 +16,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import StratifiedKFold
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import LabelEncoder
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 import sys
@@ -77,28 +77,27 @@ if __name__ == "__main__":
     print(x_df.shape, y_df.shape)
     # print(x_df)
 
-    # encoder = OneHotEncoder()
-    x_encoded_data = pd.get_dummies(x_df)
-    y_encoded_data = pd.get_dummies(y_df)
+    labelencoder = LabelEncoder()
+    x_encoded_data = labelencoder.fit_transform(x_df.values.ravel())
+    y_encoded_data = labelencoder.fit_transform(y_df.values.ravel())
     print(x_encoded_data.shape, y_encoded_data.shape)
 
-    # print(type(x_encoded_data))
     x_encoded_df = pd.DataFrame(x_encoded_data)
     y_encoded_df = pd.DataFrame(y_encoded_data)
     # x_encoded_df = x_encoded_df.values.ravel()
     # y_encoded_df = y_encoded_df.values.ravel()
     print(x_encoded_df.shape, y_encoded_df.shape)
 
-    X_train, X_test, Y_train, Y_test = train_test_split(x_encoded_df, y_encoded_df, train_size = 0.8)
+    X_train, X_test, Y_train, Y_test = train_test_split(x_encoded_df, y_encoded_df.iloc[:, 0], train_size = 0.8)
 
     # inspect algorithms
     models = []
     models.append(('  LR', LogisticRegression(solver='liblinear')))
-    # models.append((' LDA', LinearDiscriminantAnalysis()))
-    # models.append((' KNN', KNeighborsClassifier()))
-    # models.append(('CART', DecisionTreeClassifier()))
-    # models.append(('  NB', GaussianNB()))
-    # models.append((' SVM', SVC(gamma='auto')))
+    models.append((' LDA', LinearDiscriminantAnalysis()))
+    models.append((' KNN', KNeighborsClassifier()))
+    models.append(('CART', DecisionTreeClassifier()))
+    models.append(('  NB', GaussianNB()))
+    models.append((' SVM', SVC(gamma='auto')))
     print('Evaluate algorithms:')
     results = []
     names = []
@@ -113,12 +112,12 @@ if __name__ == "__main__":
     # plt.show()
 
     # prediction
-    model = SVC(gamma='auto')
-    model.fit(X_train, Y_train)
-    predictions = model.predict(X_test)
-    print('\nAccuracy:', accuracy_score(Y_test, predictions))
-    print('\nConfusion:\n', confusion_matrix(Y_test, predictions))
-    print('\nClassification:\n', classification_report(Y_test, predictions))
+    # model = SVC(gamma='auto')
+    # model.fit(X_train, Y_train)
+    # predictions = model.predict(X_test)
+    # print('\nAccuracy:', accuracy_score(Y_test, predictions))
+    # print('\nConfusion:\n', confusion_matrix(Y_test, predictions))
+    # print('\nClassification:\n', classification_report(Y_test, predictions))
  
     # plt.scatter(x_test, y_pred, color='b')
     # plt.plot(x_test, y_pred, color='k')
