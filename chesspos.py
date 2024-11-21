@@ -112,12 +112,12 @@ if __name__ == "__main__":
     # plt.show()
 
     # prediction
-    # model = SVC(gamma='auto')
-    # model.fit(X_train, Y_train)
-    # predictions = model.predict(X_test)
-    # print('\nAccuracy:', accuracy_score(Y_test, predictions))
-    # print('\nConfusion:\n', confusion_matrix(Y_test, predictions))
-    # print('\nClassification:\n', classification_report(Y_test, predictions))
+    model = SVC(gamma='auto')
+    model.fit(X_train, Y_train)
+    predictions = model.predict(X_test)
+    print('\nAccuracy:', accuracy_score(Y_test, predictions))
+    print('\nConfusion:\n', confusion_matrix(Y_test, predictions))
+    print('\nClassification:\n', classification_report(Y_test, predictions))
  
     # plt.scatter(x_test, y_pred, color='b')
     # plt.plot(x_test, y_pred, color='k')
