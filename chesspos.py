@@ -90,12 +90,12 @@ if __name__ == "__main__":
 
     # inspect algorithms
     models = []
-    models.append(('  LR', LogisticRegression(solver='liblinear')))
-    models.append((' LDA', LinearDiscriminantAnalysis()))
-    models.append((' KNN', KNeighborsClassifier()))
-    models.append(('CART', DecisionTreeClassifier()))
-    models.append(('  NB', GaussianNB()))
-    models.append((' SVM', SVC(gamma='auto')))
+    models.append((' LR', LogisticRegression(solver='liblinear')))
+    models.append(('LDA', LinearDiscriminantAnalysis()))
+    models.append(('KNN', KNeighborsClassifier()))
+    models.append(('DTC', DecisionTreeClassifier()))
+    models.append((' NB', GaussianNB()))
+    models.append(('SVM', SVC(gamma='auto')))
     print('Evaluate algorithms:')
     results = []
     names = []
