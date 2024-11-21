@@ -88,7 +88,7 @@ if __name__ == "__main__":
     # y_encoded_df = y_encoded_df.values.ravel()
     print(x_encoded_df.shape, y_encoded_df.shape)
 
-    X_train, X_test, Y_train, Y_test = train_test_split(x_encoded_df, y_encoded_df.iloc[:, 0], train_size = 0.8)
+    X_train, X_test, Y_train, Y_test = train_test_split(x_encoded_df.iloc[:, 0], y_encoded_df.iloc[:, 0], train_size = 0.8)
 
     # inspect algorithms
     models = []
