@@ -70,23 +70,23 @@ if __name__ == "__main__":
 
     pgns = sys.argv[1:]
     X, Y = process_pgns(pgns)
-    print(len(X), len(Y))
+    # print(len(X), len(Y))
 
     x_df = pd.DataFrame(X)
     y_df = pd.DataFrame(Y)
-    print(x_df.shape, y_df.shape)
+    # print(x_df.shape, y_df.shape)
     # print(x_df)
 
     labelencoder = LabelEncoder()
     x_encoded_data = labelencoder.fit_transform(x_df.values.ravel())
     y_encoded_data = labelencoder.fit_transform(y_df.values.ravel())
-    print(x_encoded_data.shape, y_encoded_data.shape)
+    # print(x_encoded_data.shape, y_encoded_data.shape)
 
     x_encoded_df = pd.DataFrame(x_encoded_data)
     y_encoded_df = pd.DataFrame(y_encoded_data)
     # x_encoded_df = x_encoded_df.values.ravel()
     # y_encoded_df = y_encoded_df.values.ravel()
-    print(x_encoded_df.shape, y_encoded_df.shape)
+    # print(x_encoded_df.shape, y_encoded_df.shape)
 
     X_train, X_test, Y_train, Y_test = train_test_split(x_encoded_df, y_encoded_df.iloc[:, 0], train_size = 0.8)
 
