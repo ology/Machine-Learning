@@ -1,20 +1,30 @@
 import chess.pgn
-# import matplotlib.pyplot as plt
-import numpy as np
+from matplotlib import pyplot as plt
 import pandas as pd
+from pandas import read_csv
+from pandas.plotting import scatter_matrix
 import re
-from sklearn.linear_model import LinearRegression
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.model_selection import cross_val_score
-from sklearn.model_selection import ShuffleSplit
+from sklearn import datasets
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
+from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import StratifiedKFold
+from sklearn.naive_bayes import GaussianNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.svm import SVC
+from sklearn.tree import DecisionTreeClassifier
 import sys
 
 def process_pgns(pgns):
     X = []
     Y = []
     i = 0
-    limit = 3 # limit j number of moves below
+    limit = 5 # limit j number of moves below
     for pgn in pgns:
         content = open(pgn)
         try:
@@ -74,17 +84,37 @@ if __name__ == "__main__":
     y_encoded_df = pd.DataFrame(y_encoded_data.toarray())
     # print(x_encoded_df.shape)
 
-    x_train, x_test, y_train, y_test = train_test_split(x_encoded_df, y_encoded_df, train_size = 0.8)
-    model = LinearRegression().fit(x_train, y_train)
-    train_score = model.score(x_train, y_train)
-    test_score = model.score(x_test, y_test)
-    print(train_score, test_score)
-    # y_pred = model.predict(x_test)
+    X_train, X_test, Y_train, Y_test = train_test_split(x_encoded_df, y_encoded_df, train_size = 0.8)
+    
+    # inspect algorithms
+    models = []
+    models.append(('  LR', LogisticRegression(solver='liblinear')))
+    models.append((' LDA', LinearDiscriminantAnalysis()))
+    models.append((' KNN', KNeighborsClassifier()))
+    models.append(('CART', DecisionTreeClassifier()))
+    models.append(('  NB', GaussianNB()))
+    models.append((' SVM', SVC(gamma='auto')))
+    print('Evaluate algorithms:')
+    results = []
+    names = []
+    for name, model in models:
+        kfold = StratifiedKFold(n_splits=10, random_state=1, shuffle=True)
+        cv_results = cross_val_score(model, X_train, Y_train, cv=kfold, scoring='accuracy')
+        results.append(cv_results)
+        names.append(name)
+        print('%s: mean=%f (std=%f)' % (name, cv_results.mean(), cv_results.std()))
+    # plt.boxplot(results, labels=names)
+    # plt.title('Algorithm Comparison')
+    # plt.show()
 
-    cv = ShuffleSplit(n_splits=5, test_size=0.2, random_state=0)
-    cv_score = cross_val_score(LinearRegression(), x_encoded_df, y_encoded_df, cv=cv)
-    print(cv_score)
-
+    # prediction
+    model = SVC(gamma='auto')
+    model.fit(X_train, Y_train)
+    predictions = model.predict(X_test)
+    print('\nAccuracy:', accuracy_score(Y_test, predictions))
+    print('\nConfusion:\n', confusion_matrix(Y_test, predictions))
+    print('\nClassification:\n', classification_report(Y_test, predictions))
+ 
     # plt.scatter(x_test, y_pred, color='b')
     # plt.plot(x_test, y_pred, color='k')
     # plt.show()
