@@ -25,9 +25,14 @@ dataset['class'] = [ class_names[x] for x in iris.target ]
 # print(dataset.describe())
 # print(dataset.groupby('class').size())
 
-dataset.plot(kind='box', subplots=True, layout=(2,2), sharex=False, sharey=False)
-plt.show()
-dataset.hist()
-plt.show()
-scatter_matrix(dataset)
-plt.show()
+# dataset.plot(kind='box', subplots=True, layout=(2,2), sharex=False, sharey=False)
+# plt.show()
+# dataset.hist()
+# plt.show()
+# scatter_matrix(dataset)
+# plt.show()
+
+values = dataset.values
+X = values[:,0:4]
+y = values[:,4]
+X_train, X_validation, Y_train, Y_validation = train_test_split(X, y, test_size=0.20, random_state=1)
