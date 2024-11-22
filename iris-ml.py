@@ -34,7 +34,9 @@ dataset['class'] = [ class_names[x] for x in iris.target ]
 
 values = dataset.values
 X = values[:, 0:4]
+# print(X)
 y = values[:, 4]
+# print(y)
 X_train, X_test, Y_train, Y_test = train_test_split(X, y, test_size=0.20, random_state=1)
 
 # inspect algorithms
