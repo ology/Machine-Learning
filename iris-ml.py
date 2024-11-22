@@ -41,13 +41,13 @@ dataset['species'] = [ class_names[x] for x in iris.target ]
 # scatter_matrix(dataset)
 # plt.show()
 
-df = dataset.copy()
-label_encoder = LabelEncoder()
-df['species'] = label_encoder.fit_transform(df['species'])
-# print(df)
-# print(df['species'].unique())
-sns.heatmap(df.corr(), cmap="YlGnBu", linecolor='white', linewidths=1, annot=True)
-plt.show()
+# df = dataset.copy()
+# label_encoder = LabelEncoder()
+# df['species'] = label_encoder.fit_transform(df['species'])
+# # print(df)
+# # print(df['species'].unique())
+# sns.heatmap(df.corr(), cmap="YlGnBu", linecolor='white', linewidths=1, annot=True)
+# plt.show()
 
 values = dataset.values
 X = values[:, 0:4]
