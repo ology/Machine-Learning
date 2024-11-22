@@ -41,7 +41,6 @@ dataset['species'] = [ class_names[x] for x in iris.target ]
 # scatter_matrix(dataset)
 # plt.show()
 
-# iris = sns.load_dataset("iris")
 # df = dataset.copy()
 # label_encoder = LabelEncoder()
 # df['species'] = label_encoder.fit_transform(df['species'])
