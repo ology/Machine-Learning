@@ -2,6 +2,7 @@ from matplotlib import pyplot as plt
 import pandas as pd
 from pandas import read_csv
 from pandas.plotting import scatter_matrix
+import seaborn as sns
 from sklearn import datasets
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.linear_model import LogisticRegression
@@ -10,6 +11,7 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
+from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import StratifiedKFold
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
@@ -18,15 +20,15 @@ from sklearn.tree import DecisionTreeClassifier
 
 iris = datasets.load_iris()
 dataset = pd.DataFrame(iris.data, columns=iris.feature_names)
-class_names = ['Iris-Setosa', 'Iris-Versicolour', 'Iris-Virginica']
-dataset['class'] = [ class_names[x] for x in iris.target ]
+class_names = ['setosa', 'versicolour', 'virginica']
+dataset['species'] = [ class_names[x] for x in iris.target ]
 # print(dataset)
 # print(dataset.shape)
 # print(dataset.describe())
-# print(dataset.groupby('class').size())
+# print(dataset.groupby('species').size())
 # print(dataset.iloc[2])
-# print(dataset.loc[ dataset['class'] == 'Iris-Setosa' ])
-# print(dataset['class'].value_counts())
+# print(dataset.loc[ dataset['species'] == 'Iris-Setosa' ])
+# print(dataset['species'].value_counts())
 # print("sepal length (cm) Sum:", dataset['sepal length (cm)'].sum(), ", Median:", dataset['sepal length (cm)'].median())
 # print("sepal length (cm) Min:", dataset['sepal length (cm)'].min(), ", Max:", dataset['sepal length (cm)'].max())
 # print(dataset.isnull())
@@ -37,6 +39,15 @@ dataset['class'] = [ class_names[x] for x in iris.target ]
 # dataset.hist()
 # plt.show()
 # scatter_matrix(dataset)
+# plt.show()
+
+# iris = sns.load_dataset("iris")
+# df = dataset.copy()
+# label_encoder = LabelEncoder()
+# df['species'] = label_encoder.fit_transform(df['species'])
+# print(df)
+# print(df['species'].unique())
+# sns.heatmap(df.corr(), cmap="YlGnBu", linecolor='white', linewidths=1, annot=True)
 # plt.show()
 
 values = dataset.values
