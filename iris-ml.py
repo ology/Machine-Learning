@@ -30,7 +30,6 @@ dataset['species'] = [ class_names[x] for x in iris.target ]
 # print(dataset.isnull())
 # print(dataset.isnull().sum())
 
-# matplotlib
 # dataset.plot(kind='box', subplots=True, layout=(2,2), sharex=False, sharey=False)
 # plt.show()
 # dataset.hist()
