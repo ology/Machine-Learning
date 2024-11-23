@@ -25,7 +25,7 @@ dataset['species'] = [ class_names[x] for x in iris.target ]
 # print("sepal length (cm) Min:", dataset['sepal length (cm)'].min(), ", Max:", dataset['sepal length (cm)'].max())
 # print(dataset.groupby('species').size())
 # print(dataset.iloc[2])
-# print(dataset.loc[ dataset['species'] == 'Iris-Setosa' ])
+# print(dataset.loc[ dataset['species'] == 'setosa' ])
 # print(dataset['species'].value_counts())
 # print(dataset.isnull())
 # print(dataset.isnull().sum())
