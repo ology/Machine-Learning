@@ -117,6 +117,6 @@ if __name__ == "__main__":
     # print('\nConfusion:\n', confusion_matrix(Y_test, predictions))
     # print('\nClassification:\n', classification_report(Y_test, predictions))
  
-    plt.scatter(X_test, predictions, color='b')
-    # plt.plot(x_test, y_pred, color='k')
-    plt.show()
+    # plt.scatter(X_test, predictions, color='b')
+    # plt.plot(X_test, predictions, color='k')
+    # plt.show()
