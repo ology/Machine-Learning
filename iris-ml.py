@@ -50,11 +50,11 @@ dataset['species'] = [ class_names[x] for x in iris.target ]
 # plt.show()
 
 values = dataset.values
-X = values[:, 0:4]
+x = values[:, 0:4]
 # print(X)
 y = values[:, 4]
 # print(y)
-X_train, X_test, Y_train, Y_test = train_test_split(X, y, test_size=0.20, random_state=1)
+X_train, X_test, Y_train, Y_test = train_test_split(x, y, test_size=0.20, random_state=1)
 
 # inspect algorithms
 models = []
