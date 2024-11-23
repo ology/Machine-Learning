@@ -34,6 +34,7 @@ dataset['species'] = [ class_names[x] for x in iris.target ]
 # print(dataset.isnull())
 # print(dataset.isnull().sum())
 
+# matplotlib
 # dataset.plot(kind='box', subplots=True, layout=(2,2), sharex=False, sharey=False)
 # plt.show()
 # dataset.hist()
@@ -41,12 +42,16 @@ dataset['species'] = [ class_names[x] for x in iris.target ]
 # scatter_matrix(dataset)
 # plt.show()
 
+# seaborn
 # df = dataset.copy()
 # label_encoder = LabelEncoder()
 # df['species'] = label_encoder.fit_transform(df['species'])
-# # print(df)
-# # print(df['species'].unique())
+# print(df)
+# print(df['species'].unique())
 # sns.heatmap(df.corr(), cmap="YlGnBu", linecolor='white', linewidths=1, annot=True)
+# plt.show()
+# print(df.corr(method='pearson'))
+# sns.pairplot(df, hue='species')
 # plt.show()
 
 values = dataset.values
