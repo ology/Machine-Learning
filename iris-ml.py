@@ -37,16 +37,16 @@ dataset['species'] = [ class_names[x] for x in iris.target ]
 # scatter_matrix(dataset)
 # plt.show()
 
-# setosa = dataset[ dataset['species'] == 'setosa' ]
-# versic = dataset[ dataset['species'] == 'versicolour' ]
-# virgin = dataset[ dataset['species'] == 'virginica' ]
+# a = dataset[ dataset['species'] == 'setosa' ]
+# b = dataset[ dataset['species'] == 'versicolour' ]
+# c = dataset[ dataset['species'] == 'virginica' ]
 # xdata = 'petal length (cm)'
 # ydata = 'petal width (cm)'
 # fig, ax = plt.subplots()
 # fig.set_size_inches(13, 7) # adjusting the length and width of plot
-# ax.scatter(setosa[xdata], setosa[ydata], label="Setosa", facecolor="blue")
-# ax.scatter(versic[xdata], versic[ydata], label="Versicolor", facecolor="green")
-# ax.scatter(virgin[xdata], virgin[ydata], label="Virginica", facecolor="red")
+# ax.scatter(a[xdata], a[ydata], label="Setosa", facecolor="blue")
+# ax.scatter(b[xdata], b[ydata], label="Versicolor", facecolor="green")
+# ax.scatter(c[xdata], c[ydata], label="Virginica", facecolor="red")
 # ax.set_xlabel(xdata)
 # ax.set_ylabel(ydata)
 # ax.grid()
