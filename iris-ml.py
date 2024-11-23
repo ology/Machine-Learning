@@ -7,7 +7,6 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 from sklearn.model_selection import train_test_split, cross_val_score
-from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import StratifiedKFold
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
@@ -15,6 +14,7 @@ from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 
 iris = datasets.load_iris()
+# print(iris.keys())
 dataset = pd.DataFrame(iris.data, columns=iris.feature_names)
 class_names = ['setosa', 'versicolour', 'virginica']
 dataset['species'] = [ class_names[x] for x in iris.target ]
@@ -39,10 +39,9 @@ dataset['species'] = [ class_names[x] for x in iris.target ]
 
 # seaborn
 # df = dataset.copy()
-# label_encoder = LabelEncoder()
-# df['species'] = label_encoder.fit_transform(df['species'])
-# print(df)
-# print(df['species'].unique())
+# df['species'] = iris['target']
+# # print(df)
+# # print(df['species'].unique())
 # sns.heatmap(df.corr(), cmap="YlGnBu", linecolor='white', linewidths=1, annot=True)
 # plt.show()
 # print(df.corr(method='pearson'))
