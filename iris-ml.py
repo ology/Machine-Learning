@@ -37,22 +37,22 @@ dataset['species'] = [ class_names[x] for x in iris.target ]
 # scatter_matrix(dataset)
 # plt.show()
 
-setosa = dataset[ dataset['species'] == 'setosa' ]
-versicolor = dataset[ dataset['species'] == 'versicolour' ]
-virginica = dataset[ dataset['species'] == 'virginica' ]
-xlabel = 'petal length (cm)'
-ylabel = 'petal width (cm)'
-fig, ax = plt.subplots()
-fig.set_size_inches(13, 7) # adjusting the length and width of plot
-ax.scatter(setosa[xlabel], setosa[ylabel], label="Setosa", facecolor="blue")
-ax.scatter(versicolor[xlabel], versicolor[ylabel], label="Versicolor", facecolor="green")
-ax.scatter(virginica[xlabel], virginica[ylabel], label="Virginica", facecolor="red")
-ax.set_xlabel(xlabel)
-ax.set_ylabel(ylabel)
-ax.grid()
-ax.set_title("Iris petals")
-ax.legend()
-plt.show()
+# setosa = dataset[ dataset['species'] == 'setosa' ]
+# versicolor = dataset[ dataset['species'] == 'versicolour' ]
+# virginica = dataset[ dataset['species'] == 'virginica' ]
+# xlabel = 'petal length (cm)'
+# ylabel = 'petal width (cm)'
+# fig, ax = plt.subplots()
+# fig.set_size_inches(13, 7) # adjusting the length and width of plot
+# ax.scatter(setosa[xlabel], setosa[ylabel], label="Setosa", facecolor="blue")
+# ax.scatter(versicolor[xlabel], versicolor[ylabel], label="Versicolor", facecolor="green")
+# ax.scatter(virginica[xlabel], virginica[ylabel], label="Virginica", facecolor="red")
+# ax.set_xlabel(xlabel)
+# ax.set_ylabel(ylabel)
+# ax.grid()
+# ax.set_title("Iris petals")
+# ax.legend()
+# plt.show()
 
 # seaborn
 # df = dataset.copy()
