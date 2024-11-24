@@ -5,7 +5,6 @@ import pandas as pd
 from pandas import read_csv
 from pandas.plotting import scatter_matrix
 import re
-from sklearn import datasets
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
