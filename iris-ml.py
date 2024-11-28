@@ -21,8 +21,9 @@ dataset['species'] = [ species_names[x] for x in iris.target ]
 # print(dataset)
 # print(dataset.shape)
 # print(dataset.describe())
-# print("sepal length (cm) Sum:", dataset['sepal length (cm)'].sum(), ", Median:", dataset['sepal length (cm)'].median())
-# print("sepal length (cm) Min:", dataset['sepal length (cm)'].min(), ", Max:", dataset['sepal length (cm)'].max())
+# x = 'sepal length (cm)'
+# print(f"{x} Sum:", dataset[x].sum(), ", Median:", dataset[x].median())
+# print(f"{x} Min:", dataset[x].min(), ", Max:", dataset[x].max())
 # print(dataset.groupby('species').size())
 # print(dataset.iloc[2])
 # print(dataset.loc[ dataset['species'] == 'setosa' ])
