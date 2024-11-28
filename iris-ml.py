@@ -16,8 +16,8 @@ from sklearn.tree import DecisionTreeClassifier
 iris = datasets.load_iris()
 # print(iris.keys())
 dataset = pd.DataFrame(iris.data, columns=iris.feature_names)
-class_names = ['setosa', 'versicolour', 'virginica']
-dataset['species'] = [ class_names[x] for x in iris.target ]
+species_names = ['setosa', 'versicolour', 'virginica']
+dataset['species'] = [ species_names[x] for x in iris.target ]
 # print(dataset)
 # print(dataset.shape)
 # print(dataset.describe())
