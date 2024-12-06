@@ -81,8 +81,6 @@ df3['Cabin'] = df3['Cabin'].fillna('Unknown')
 df3['Ticket'] = df3['Ticket'].fillna('Unknown')
 df3['Boat'] = df3['Boat'].fillna('Unknown')
 # print(df3.describe())#.info())
-# with pd.option_context('display.max_rows', None, 'display.max_columns', None):
-#     print(df3['Embarked'])
 
 df4 = df3.copy()
 df4['Boat'] = df4['Boat'].astype('category').cat.codes
@@ -92,8 +90,6 @@ df4.loc[df4['Embarked'] == -1, 'Embarked'] = pd.NA
 df4['Home'] = df4['Home'].astype('category').cat.codes
 df4.loc[df4['Home'] == -1, 'Home'] = pd.NA
 # print(df4.describe())#info())
-# with pd.option_context('display.max_rows', None, 'display.max_columns', None):
-#     print(df4)
 
 X = df4.drop(['Survived', 'Name', 'Embarked', 'Ticket', 'Cabin'], axis=1)
 y = df4['Survived']
