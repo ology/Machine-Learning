@@ -74,11 +74,14 @@ df3.loc[df3['Pclass'] == '3rd', 'Pclass'] = 3
 df3.loc[df3['Embarked'] == 'C', 'Embarked'] = 'Cherbourg'
 df3.loc[df3['Embarked'] == 'S', 'Embarked'] = 'Southampton'
 df3.loc[df3['Embarked'] == 'Q', 'Embarked'] = 'Queenstown'
-print(df3)
+df3.loc[df3['Sex'] == 'male', 'Sex'] = 0
+df3.loc[df3['Sex'] == 'female', 'Sex'] = 1
+# print(df3.columns)
 # with pd.option_context('display.max_rows', None, 'display.max_columns', None):
 #     print(df3['Embarked'])
 
-# df = pd.get_dummies(df, columns=['Pclass', 'Sex', 'Embarked', 'home.dest', 'boat'])
+df4 = pd.get_dummies(df3, columns=['Boat', 'Embarked', 'Home'], dtype=int)
+print(df4)
 
 # # Split the data into training and test sets
 # X = df.drop(['survived', 'name', 'ticket', 'room'], axis=1)
