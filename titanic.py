@@ -1,13 +1,8 @@
-# from sklearn.datasets import fetch_openml
-# X, y = fetch_openml("titanic", version=7, as_frame=True, return_X_y=True)
-# print(X, y)
-
-# Import libraries
 import pandas as pd
 # import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
-# from sklearn.metrics import accuracy_score, precision_score, recall_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score
 import re
 import string
 
@@ -104,15 +99,14 @@ X = df4.drop(['Survived', 'Name', 'Home', 'Embarked', 'Ticket', 'Cabin', 'Boat']
 y = df4['Survived']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-model = LogisticRegression()
+model = LogisticRegression(solver='lbfgs', max_iter=1000)
 model.fit(X_train, y_train)
 
-# # y_pred = model.predict(X_test)
+y_pred = model.predict(X_test)
 
-# # accuracy = accuracy_score(y_test, y_pred)
-# # precision = precision_score(y_test, y_pred)
-# # recall = recall_score(y_test, y_pred)
-
-# # print("Accuracy:", accuracy)
-# # print("Precision:", precision)
-# # print("Recall:", recall)
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+print("Accuracy:", accuracy)
+print("Precision:", precision)
+print("Recall:", recall)
