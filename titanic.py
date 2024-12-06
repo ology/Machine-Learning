@@ -76,9 +76,9 @@ df3.loc[df3['Embarked'] == 'S', 'Embarked'] = 'Southampton'
 df3.loc[df3['Embarked'] == 'Q', 'Embarked'] = 'Queenstown'
 df3.loc[df3['Sex'] == 'male', 'Sex'] = 0
 df3.loc[df3['Sex'] == 'female', 'Sex'] = 1
-df3.loc[df3['SibSp'].isna(), 'SibSp'] = 0
-df3.loc[df3['Parch'].isna(), 'Parch'] = 0
-df3.loc[df3['Fare'].isna(), 'Fare'] = 0
+df3['SibSp'] = df3['SibSp'].fillna(0)
+df3['Parch'] = df3['Parch'].fillna(0)
+df3['Fare'] = df3['Fare'].fillna(0)
 df3['Age'] = df3['Age'].fillna(df3['Age'].mean())
 df3['Embarked'] = df3['Embarked'].fillna('Unknown')
 df3['Home'] = df3['Home'].fillna('Unknown')
