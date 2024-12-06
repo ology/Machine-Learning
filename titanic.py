@@ -44,15 +44,12 @@ df2.rename(columns={
 }, inplace=True)
 
 merged = []
-matched = 0
-unmatched = 0
 for row1 in df1.itertuples():
     match1 = re.search(r'^(\w+ \w+ \w+)', row1.sanitized)
     found = 0
     for row2 in df2.itertuples():
         match2 = re.search(r'^(\w+ \w+ \w+)', row2.sanitized)
         if match1.group(1) == match2.group(1):
-            matched += 1
             found = 1
             row = pd.DataFrame([row2])
             row['SibSp'] = None
@@ -62,7 +59,6 @@ for row1 in df1.itertuples():
             merged.append(d[0])
             break
     if not found:
-        unmatched += 1
         found = 0
         row = pd.DataFrame([row1])
         row['Boat'] = None
