@@ -14,7 +14,7 @@ import string
 df1 = pd.read_csv('titanic-1.csv')
 # PassengerId,Survived,Pclass,Name,Sex,Age,SibSp,Parch,Ticket,Fare,Cabin,Embarked
 # UNIQUE: SibSp,Parch,Fare
-df1.dropna(inplace=True, subset=['Survived','Pclass','Sex','Age'])
+df1.dropna(inplace=True, subset=['Survived'])
 df1['sanitized'] = df1['Name'].replace(r'[' + string.punctuation + r']', '', regex=True)
 df1 = df1.sort_values(by='sanitized')
 # with pd.option_context('display.max_rows', None, 'display.max_columns', None):
@@ -23,7 +23,7 @@ df1 = df1.sort_values(by='sanitized')
 df2 = pd.read_csv('titanic-2.csv')
 # "row.names","pclass","survived","name","age","embarked","home.dest","room","ticket","boat","sex"
 # UNIQUE: "home.dest","boat"
-df2.dropna(inplace=True, subset=['survived','pclass','sex','age'])
+df2.dropna(inplace=True, subset=['survived'])
 df2['sanitized'] = df2['name'].replace(r'[' + string.punctuation + r']', '', regex=True)
 df2 = df2.sort_values(by='sanitized')
 # with pd.option_context('display.max_rows', None, 'display.max_columns', None):
@@ -45,10 +45,10 @@ df2.rename(columns={
 
 merged = []
 for row1 in df1.itertuples():
-    match1 = re.search(r'^(\w+ \w+ \w+)', row1.sanitized)
+    match1 = re.search(r'^(\w+ \w+( \w*)?)', row1.sanitized)
     found = 0
     for row2 in df2.itertuples():
-        match2 = re.search(r'^(\w+ \w+ \w+)', row2.sanitized)
+        match2 = re.search(r'^(\w+ \w+( \w*)?)', row2.sanitized)
         if match1.group(1) == match2.group(1):
             found = 1
             row = pd.DataFrame([row2])
@@ -79,7 +79,13 @@ df3.loc[df3['Sex'] == 'female', 'Sex'] = 1
 df3.loc[df3['SibSp'].isna(), 'SibSp'] = 0
 df3.loc[df3['Parch'].isna(), 'Parch'] = 0
 df3.loc[df3['Fare'].isna(), 'Fare'] = 0
-# print(df3)
+df3['Age'] = df3['Age'].fillna(df3['Age'].mean())
+df3['Embarked'] = df3['Embarked'].fillna('Unknown')
+df3['Home'] = df3['Home'].fillna('Unknown')
+df3['Cabin'] = df3['Cabin'].fillna('Unknown')
+df3['Ticket'] = df3['Ticket'].fillna('Unknown')
+df3['Boat'] = df3['Boat'].fillna('Unknown')
+# print(df3.info())
 # with pd.option_context('display.max_rows', None, 'display.max_columns', None):
 #     print(df3['Embarked'])
 
@@ -90,23 +96,26 @@ df4['Embarked'] = df4['Embarked'].astype('category').cat.codes
 df4.loc[df4['Embarked'] == -1, 'Embarked'] = pd.NA
 df4['Home'] = df4['Home'].astype('category').cat.codes
 df4.loc[df4['Home'] == -1, 'Home'] = pd.NA
-print(df4)
+print(df4.info())
 # with pd.option_context('display.max_rows', None, 'display.max_columns', None):
 #     print(df4)
 
-X = df4.drop(['Survived', 'Name', 'Ticket', 'Cabin'], axis=1)
-y = df4['Survived']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+df4.dropna(inplace=True, subset=['Survived','Pclass','Sex','Age'])
+# print(df4)
+
+# X = df4.drop(['Survived', 'Name', 'Home', 'Embarked', 'Ticket', 'Cabin', 'Boat'], axis=1)
+# y = df4['Survived']
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # model = LogisticRegression()
 # model.fit(X_train, y_train)
 
-# y_pred = model.predict(X_test)
+# # y_pred = model.predict(X_test)
 
-# accuracy = accuracy_score(y_test, y_pred)
-# precision = precision_score(y_test, y_pred)
-# recall = recall_score(y_test, y_pred)
+# # accuracy = accuracy_score(y_test, y_pred)
+# # precision = precision_score(y_test, y_pred)
+# # recall = recall_score(y_test, y_pred)
 
-# print("Accuracy:", accuracy)
-# print("Precision:", precision)
-# print("Recall:", recall)
+# # print("Accuracy:", accuracy)
+# # print("Precision:", precision)
+# # print("Recall:", recall)
