@@ -47,17 +47,17 @@ for row1 in df1.itertuples():
         if match1.group(1) == match2.group(1):
             found = 1
             row = pd.DataFrame([row2])
-            row['SibSp'] = None
-            row['Parch'] = None
-            row['Fare'] = None
+            row['SibSp'] = pd.NA
+            row['Parch'] = pd.NA
+            row['Fare'] = pd.NA
             d = row.to_dict('records')
             merged.append(d[0])
             break
     if not found:
         found = 0
         row = pd.DataFrame([row1])
-        row['Boat'] = None
-        row['Home'] = None
+        row['Boat'] = pd.NA
+        row['Home'] = pd.NA
         d = row.to_dict('records')
         merged.append(d[0])
 
