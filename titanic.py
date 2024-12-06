@@ -63,9 +63,8 @@ for row1 in df1.itertuples():
 
 df3 = pd.DataFrame(merged)
 df3.drop(columns=['Index', 'sanitized'], inplace=True)
-df3.loc[df3['Pclass'] == '1st', 'Pclass'] = 1
-df3.loc[df3['Pclass'] == '2nd', 'Pclass'] = 2
-df3.loc[df3['Pclass'] == '3rd', 'Pclass'] = 3
+df3['Pclass'] = df3['Pclass'].astype(str)
+df3['Pclass'] = df3['Pclass'].str[0]
 df3.loc[df3['Embarked'] == 'C', 'Embarked'] = 'Cherbourg'
 df3.loc[df3['Embarked'] == 'S', 'Embarked'] = 'Southampton'
 df3.loc[df3['Embarked'] == 'Q', 'Embarked'] = 'Queenstown'
@@ -80,7 +79,7 @@ df3['Home'] = df3['Home'].fillna('Unknown')
 df3['Cabin'] = df3['Cabin'].fillna('Unknown')
 df3['Ticket'] = df3['Ticket'].fillna('Unknown')
 df3['Boat'] = df3['Boat'].fillna('Unknown')
-# print(df3.info())
+print(df3)#.info())
 # with pd.option_context('display.max_rows', None, 'display.max_columns', None):
 #     print(df3['Embarked'])
 
