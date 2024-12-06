@@ -87,7 +87,7 @@ df4['Embarked'] = df4['Embarked'].astype('category').cat.codes
 df4.loc[df4['Embarked'] == -1, 'Embarked'] = pd.NA
 df4['Home'] = df4['Home'].astype('category').cat.codes
 df4.loc[df4['Home'] == -1, 'Home'] = pd.NA
-# print(df4)
+print(df4.describe)
 # with pd.option_context('display.max_rows', None, 'display.max_columns', None):
 #     print(df4)
 
