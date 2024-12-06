@@ -67,7 +67,7 @@ for row1 in df1.itertuples():
         merged.append(d[0])
 
 df3 = pd.DataFrame(merged)
-df3.drop(columns=['sanitized'], inplace=True)
+df3.drop(columns=['Index', 'sanitized'], inplace=True)
 print(df3)
 
 # df = pd.get_dummies(df, columns=['Pclass', 'Sex', 'Embarked', 'home.dest', 'boat'])
