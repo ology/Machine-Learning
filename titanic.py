@@ -73,7 +73,6 @@ for row1 in df1.itertuples():
             row['Fare'] = None
             # print(len(row))
             d = row.to_dict('records')
-            # merged[row2.sanitized] = d
             merged.append(d[0])
             break
     if not found:
@@ -90,21 +89,12 @@ for row1 in df1.itertuples():
         # print(len(row))
         d = row.to_dict('records')
         # print(d)
-        # merged[row1.sanitized] = d
         merged.append(d[0])
         # print(merged[row1.sanitized])
 # print(merged)
 df3 = pd.DataFrame(merged)
 df3.drop(columns=['sanitized'], inplace=True)
 print(df3)
-
-# print(merged)
-# with pd.option_context('display.max_rows', None, 'display.max_columns', None):
-#     print(merged['Name'].sort_values())
-# print(len(merged))
-
-# df = df.dropna()
-# print(len(df))
 
 # df = pd.get_dummies(df, columns=['Pclass', 'Sex', 'Embarked', 'home.dest', 'boat'])
 
