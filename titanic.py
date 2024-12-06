@@ -68,9 +68,7 @@ for row1 in df1.itertuples():
 
 df3 = pd.DataFrame(merged)
 df3.drop(columns=['Index', 'sanitized'], inplace=True)
-df3.loc[df3['Pclass'] == '1st', 'Pclass'] = 1
-df3.loc[df3['Pclass'] == '2nd', 'Pclass'] = 2
-df3.loc[df3['Pclass'] == '3rd', 'Pclass'] = 3
+df3['Pclass'] = df3['Pclass'].fillna(df3['Pclass'][0:1])
 df3.loc[df3['Embarked'] == 'C', 'Embarked'] = 'Cherbourg'
 df3.loc[df3['Embarked'] == 'S', 'Embarked'] = 'Southampton'
 df3.loc[df3['Embarked'] == 'Q', 'Embarked'] = 'Queenstown'
