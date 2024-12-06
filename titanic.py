@@ -68,7 +68,12 @@ for row1 in df1.itertuples():
 
 df3 = pd.DataFrame(merged)
 df3.drop(columns=['Index', 'sanitized'], inplace=True)
+df3.loc[df3['Embarked'] == 'C', 'Embarked'] = 'Cherbourg'
+df3.loc[df3['Embarked'] == 'S', 'Embarked'] = 'Southampton'
+df3.loc[df3['Embarked'] == 'Q', 'Embarked'] = 'Queenstown'
 print(df3)
+# with pd.option_context('display.max_rows', None, 'display.max_columns', None):
+#     print(df3['Embarked'])
 
 # df = pd.get_dummies(df, columns=['Pclass', 'Sex', 'Embarked', 'home.dest', 'boat'])
 
