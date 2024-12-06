@@ -5,7 +5,7 @@
 # Import libraries
 import pandas as pd
 # import matplotlib.pyplot as plt
-# from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split
 # from sklearn.linear_model import LogisticRegression
 # from sklearn.metrics import accuracy_score, precision_score, recall_score
 import re
@@ -87,14 +87,14 @@ df4['Embarked'] = df4['Embarked'].astype('category').cat.codes
 df4.loc[df4['Embarked'] == -1, 'Embarked'] = pd.NA
 df4['Home'] = df4['Home'].astype('category').cat.codes
 df4.loc[df4['Home'] == -1, 'Home'] = pd.NA
-print(df4.describe())
+# print(df4.describe())
 # with pd.option_context('display.max_rows', None, 'display.max_columns', None):
 #     print(df4)
 
-# # Split the data into training and test sets
-# X = df.drop(['survived', 'name', 'ticket', 'room'], axis=1)
-# y = df['survived']
-# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Split the data into training and test sets
+X = df4.drop(['Survived', 'Name', 'Ticket', 'Cabin'], axis=1)
+y = df4['Survived']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # # Build the model
 # model = LogisticRegression()
