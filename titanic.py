@@ -95,7 +95,7 @@ df4.loc[df4['Home'] == -1, 'Home'] = pd.NA
 # with pd.option_context('display.max_rows', None, 'display.max_columns', None):
 #     print(df4)
 
-X = df4.drop(['Survived', 'Name', 'Home', 'Embarked', 'Ticket', 'Cabin', 'Boat'], axis=1)
+X = df4.drop(['Survived', 'Name', 'Embarked', 'Ticket', 'Cabin'], axis=1)
 y = df4['Survived']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
