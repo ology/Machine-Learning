@@ -68,7 +68,9 @@ for row1 in df1.itertuples():
 
 df3 = pd.DataFrame(merged)
 df3.drop(columns=['Index', 'sanitized'], inplace=True)
-df3['Pclass'] = df3['Pclass'].fillna(df3['Pclass'][0:1])
+df3.loc[df3['Pclass'] == '1st', 'Pclass'] = 1
+df3.loc[df3['Pclass'] == '2nd', 'Pclass'] = 2
+df3.loc[df3['Pclass'] == '3rd', 'Pclass'] = 3
 df3.loc[df3['Embarked'] == 'C', 'Embarked'] = 'Cherbourg'
 df3.loc[df3['Embarked'] == 'S', 'Embarked'] = 'Southampton'
 df3.loc[df3['Embarked'] == 'Q', 'Embarked'] = 'Queenstown'
@@ -94,12 +96,9 @@ df4['Embarked'] = df4['Embarked'].astype('category').cat.codes
 df4.loc[df4['Embarked'] == -1, 'Embarked'] = pd.NA
 df4['Home'] = df4['Home'].astype('category').cat.codes
 df4.loc[df4['Home'] == -1, 'Home'] = pd.NA
-print(df4.info())
+# print(df4.info())
 # with pd.option_context('display.max_rows', None, 'display.max_columns', None):
 #     print(df4)
-
-df4.dropna(inplace=True, subset=['Survived','Pclass','Sex','Age'])
-# print(df4)
 
 # X = df4.drop(['Survived', 'Name', 'Home', 'Embarked', 'Ticket', 'Cabin', 'Boat'], axis=1)
 # y = df4['Survived']
