@@ -87,28 +87,28 @@ df4['Boat'] = df4['Boat'].astype('category').cat.codes
 df4.loc[df4['Boat'] == -1, 'Boat'] = pd.NA
 # df4['Embarked'] = df4['Embarked'].astype('category').cat.codes
 # df4.loc[df4['Embarked'] == -1, 'Embarked'] = pd.NA
-# df4['Home'] = df4['Home'].astype('category').cat.codes
-# df4.loc[df4['Home'] == -1, 'Home'] = pd.NA
+df4['Home'] = df4['Home'].astype('category').cat.codes
+df4.loc[df4['Home'] == -1, 'Home'] = pd.NA
 # print(df4.describe())#info())
 # print('Total Null Values : ', df4.isnull().sum().sum())
 
-print('Sex Distribution: \n', df4['Sex'].value_counts())
-print('\nCabin Distribution: \n', df4['Cabin'].value_counts())
-print('\nEmbarked Distribution: \n', df4['Embarked'].value_counts())
-print('\nHome Distribution: \n', df4['Home'].value_counts())
+# print('Sex Distribution: \n', df4['Sex'].value_counts())
+# print('\nCabin Distribution: \n', df4['Cabin'].value_counts())
+# print('\nEmbarked Distribution: \n', df4['Embarked'].value_counts())
+# print('\nHome Distribution: \n', df4['Home'].value_counts())
 
-# X = df4.drop(['Survived', 'Name', 'Embarked', 'Ticket', 'Cabin'], axis=1)
-# y = df4['Survived']
-# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X = df4.drop(['Survived', 'Name', 'Embarked', 'Ticket', 'Cabin'], axis=1)
+y = df4['Survived']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# model = LogisticRegression(solver='lbfgs', max_iter=1000)
-# model.fit(X_train, y_train)
+model = LogisticRegression(solver='lbfgs', max_iter=1000)
+model.fit(X_train, y_train)
 
-# y_pred = model.predict(X_test)
+y_pred = model.predict(X_test)
 
-# accuracy = accuracy_score(y_test, y_pred)
-# precision = precision_score(y_test, y_pred)
-# recall = recall_score(y_test, y_pred)
-# print("Accuracy:", accuracy)
-# print("Precision:", precision)
-# print("Recall:", recall)
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+print("Accuracy:", accuracy)
+print("Precision:", precision)
+print("Recall:", recall)
