@@ -90,12 +90,12 @@ df4.loc[df4['Boat'] == -1, 'Boat'] = pd.NA
 # df4['Home'] = df4['Home'].astype('category').cat.codes
 # df4.loc[df4['Home'] == -1, 'Home'] = pd.NA
 # print(df4.describe())#info())
+# print('Total Null Values : ', df4.isnull().sum().sum())
 
 print('Sex Distribution: \n', df4['Sex'].value_counts())
 print('\nCabin Distribution: \n', df4['Cabin'].value_counts())
 print('\nEmbarked Distribution: \n', df4['Embarked'].value_counts())
 print('\nHome Distribution: \n', df4['Home'].value_counts())
-print('Total Null Values : ', df4.isnull().sum().sum())
 
 # X = df4.drop(['Survived', 'Name', 'Embarked', 'Ticket', 'Cabin'], axis=1)
 # y = df4['Survived']
