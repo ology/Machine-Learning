@@ -96,6 +96,7 @@ df4.loc[df4['Home'] == -1, 'Home'] = pd.NA
 # print('\nCabin Distribution: \n', df4['Cabin'].value_counts())
 # print('\nEmbarked Distribution: \n', df4['Embarked'].value_counts())
 # print('\nHome Distribution: \n', df4['Home'].value_counts())
+# print(df4.groupby(['Sex', 'Survived'])['Survived'].count())
 
 X = df4.drop(['Survived', 'Name', 'Embarked', 'Ticket', 'Cabin'], axis=1)
 y = df4['Survived']
